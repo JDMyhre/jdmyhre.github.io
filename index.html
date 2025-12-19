@@ -272,18 +272,30 @@
 		<script src="assets/js/util.js"></script>
 		<script src="assets/js/main.js"></script>
 		<script>
-  // If user closes a project detail panel, go back to #projects instead of home.
   (function () {
     function isProjectHash(hash) {
       return /^#project-/.test(hash || "");
     }
 
+    function updateProjectViewClass() {
+      if (isProjectHash(window.location.hash)) {
+        document.body.classList.add("project-view");
+      } else {
+        document.body.classList.remove("project-view");
+      }
+    }
+
+    // Initial check
+    updateProjectViewClass();
+
+    // Watch hash changes
+    window.addEventListener("hashchange", updateProjectViewClass);
+
+    // Intercept close button
     document.addEventListener("click", function (e) {
-      // Dimension's close button uses class "close"
       var closeBtn = e.target.closest(".close");
       if (!closeBtn) return;
 
-      // If we're currently on a project detail panel, redirect close to #projects
       if (isProjectHash(window.location.hash)) {
         e.preventDefault();
         e.stopPropagation();
@@ -293,9 +305,9 @@
   })();
 </script>
 
-
 	</body>
 </html>
+
 
 
 
