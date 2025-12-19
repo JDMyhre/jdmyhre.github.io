@@ -276,9 +276,32 @@
 		<script src="assets/js/breakpoints.min.js"></script>
 		<script src="assets/js/util.js"></script>
 		<script src="assets/js/main.js"></script>
+		<script>
+  // If user closes a project detail panel, go back to #projects instead of home.
+  (function () {
+    function isProjectHash(hash) {
+      return /^#project-/.test(hash || "");
+    }
+
+    document.addEventListener("click", function (e) {
+      // Dimension's close button uses class "close"
+      var closeBtn = e.target.closest(".close");
+      if (!closeBtn) return;
+
+      // If we're currently on a project detail panel, redirect close to #projects
+      if (isProjectHash(window.location.hash)) {
+        e.preventDefault();
+        e.stopPropagation();
+        window.location.hash = "#projects";
+      }
+    }, true);
+  })();
+</script>
+
 
 	</body>
 </html>
+
 
 
 
