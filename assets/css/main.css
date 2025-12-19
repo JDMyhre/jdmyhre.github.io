@@ -1677,3 +1677,26 @@ input, select, textarea {
   height: 100%;
   object-fit: cover;
 }
+
+/* --- Profile image in header (replace icon) --- */
+#header .logo {
+  width: 9rem;
+  height: 9rem;
+}
+
+#header .logo .icon {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #2e2e2e; /* masks divider line behind image */
+  border: solid 1px rgba(255, 255, 255, 0.35);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+}
+
+#header .logo .icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
