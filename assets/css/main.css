@@ -1700,3 +1700,9 @@ input, select, textarea {
   object-fit: cover;
   display: block;
 }
+
+/* --- Use arrow instead of X on project panels --- */
+body.project-view #main .close:before {
+  content: '\f060'; /* Font Awesome arrow-left */
+}
+
