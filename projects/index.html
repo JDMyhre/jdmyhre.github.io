@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Projects | Josiah Myhre</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <header class="container">
+    <h1>Projects</h1>
+    <p class="subtitle">Selected engineering work</p>
+
+    <nav class="nav">
+      <a href="/">Home</a>
+      <a href="/projects/">Projects</a>
+      <a href="/resume/">Resume</a>
+      <a href="/about/">About</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="card">
+      <h2>Project Title</h2>
+      <p>What it is, your contribution, and the result.</p>
+      <p class="tags">CAD • Analysis • Prototyping</p>
+      <!-- Later: link to a detailed page like /projects/profiling-float/ -->
+    </div>
+
+    <div class="card">
+      <h2>Project Title</h2>
+      <p>What it is, your contribution, and the result.</p>
+      <p class="tags">Robotics • Controls • Testing</p>
+    </div>
+  </main>
+
+  <footer class="container footer">
+    <p>© <span id="year"></span> Josiah Myhre</p>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
