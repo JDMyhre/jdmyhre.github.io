@@ -1706,3 +1706,126 @@ body.project-view #main .close:before {
   content: '\f060'; /* Font Awesome arrow-left */
 }
 
+/* =========================================
+   Projects tiles: responsive auto-grid
+   Added so you can add unlimited projects
+   ========================================= */
+
+/* The project tiles container (supports common wrapper class names) */
+#projects .projects-grid,
+#projects .project-grid,
+#projects .tiles,
+#projects .projects {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14.5rem, 1fr));
+  gap: 1.25rem;
+  margin-top: 2rem;
+  align-items: stretch;
+}
+
+/* The tiles themselves (supports common link/card patterns) */
+#projects .projects-grid > a,
+#projects .project-grid > a,
+#projects .tiles > a,
+#projects .projects > a,
+#projects a.project-tile,
+#projects a.tile,
+#projects a.project-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+
+  width: 100%;
+  min-height: 7.5rem;
+  padding: 1.5rem;
+
+  border-radius: 6px;
+  border: solid 1px rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.06);
+
+  text-decoration: none;
+  border-bottom: none; /* override global dotted underline */
+  overflow: hidden;
+
+  transition: transform 0.15s ease-in-out,
+              background-color 0.15s ease-in-out,
+              border-color 0.15s ease-in-out;
+}
+
+/* Subtle sheen so tiles look like cards */
+#projects .projects-grid > a:before,
+#projects .project-grid > a:before,
+#projects .tiles > a:before,
+#projects .projects > a:before,
+#projects a.project-tile:before,
+#projects a.tile:before,
+#projects a.project-card:before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+  pointer-events: none;
+}
+
+#projects .projects-grid > a:hover,
+#projects .project-grid > a:hover,
+#projects .tiles > a:hover,
+#projects .projects > a:hover,
+#projects a.project-tile:hover,
+#projects a.tile:hover,
+#projects a.project-card:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.085);
+  border-color: rgba(255, 255, 255, 0.28);
+}
+
+/* Tile headings + descriptions */
+#projects .projects-grid > a h3,
+#projects .project-grid > a h3,
+#projects .tiles > a h3,
+#projects .projects > a h3,
+#projects a.project-tile h3,
+#projects a.tile h3,
+#projects a.project-card h3 {
+  margin: 0 0 0.35rem 0;
+  letter-spacing: 0.3rem;
+  font-size: 0.9rem;
+}
+
+#projects .projects-grid > a p,
+#projects .project-grid > a p,
+#projects .tiles > a p,
+#projects .projects > a p,
+#projects a.project-tile p,
+#projects a.tile p,
+#projects a.project-card p {
+  margin: 0;
+  opacity: 0.8;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+/* Mobile: single column */
+@media screen and (max-width: 736px) {
+  #projects .projects-grid,
+  #projects .project-grid,
+  #projects .tiles,
+  #projects .projects {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  #projects .projects-grid > a,
+  #projects .project-grid > a,
+  #projects .tiles > a,
+  #projects .projects > a,
+  #projects a.project-tile,
+  #projects a.tile,
+  #projects a.project-card {
+    padding: 1.25rem;
+    min-height: 7rem;
+  }
+}
+
+
