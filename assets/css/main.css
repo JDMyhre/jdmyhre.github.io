@@ -1706,46 +1706,33 @@ body.project-view #main .close:before {
   content: '\f060'; /* Font Awesome arrow-left */
 }
 
+
+
 /* =========================================
-   Projects tiles: responsive auto-grid
-   Added so you can add unlimited projects
+   Projects tiles: consistent full-width list
+   (works even as you add many projects)
    ========================================= */
 
-/* The project tiles container (supports common wrapper class names) */
-#projects .projects-grid,
-#projects .project-grid,
-#projects .tiles,
-#projects .projects {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(14.5rem, 1fr));
-  gap: 1.25rem;
-  margin-top: 2rem;
-  align-items: stretch;
-}
-
-/* The tiles themselves (supports common link/card patterns) */
-#projects .projects-grid > a,
-#projects .project-grid > a,
-#projects .tiles > a,
-#projects .projects > a,
-#projects a.project-tile,
-#projects a.tile,
-#projects a.project-card {
+/* Make each project tile full-width and normalize spacing.
+   We target only the project links (href starting with "#project-")
+   so other links like "Back to Projects" are unaffected. */
+#projects a[href^="#project-"] {
   position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
+  display: block;
 
   width: 100%;
   min-height: 7.5rem;
   padding: 1.5rem;
+
+  margin: 0;              /* remove any inherited/inline spacing */
+  box-sizing: border-box;
 
   border-radius: 6px;
   border: solid 1px rgba(255, 255, 255, 0.18);
   background: rgba(255, 255, 255, 0.06);
 
   text-decoration: none;
-  border-bottom: none; /* override global dotted underline */
+  border-bottom: none;    /* override global dotted underline */
   overflow: hidden;
 
   transition: transform 0.15s ease-in-out,
@@ -1753,14 +1740,22 @@ body.project-view #main .close:before {
               border-color 0.15s ease-in-out;
 }
 
+/* Enforce perfectly consistent vertical spacing between tiles,
+   regardless of wrappers or accidental extra margins. */
+#projects a[href^="#project-"] + a[href^="#project-"] {
+  margin-top: 1.25rem;
+}
+
+/* Optional: if tiles are wrapped in a container, remove container spacing quirks */
+#projects .projects-grid,
+#projects .project-grid,
+#projects .tiles,
+#projects .projects {
+  margin-top: 2rem;
+}
+
 /* Subtle sheen so tiles look like cards */
-#projects .projects-grid > a:before,
-#projects .project-grid > a:before,
-#projects .tiles > a:before,
-#projects .projects > a:before,
-#projects a.project-tile:before,
-#projects a.tile:before,
-#projects a.project-card:before {
+#projects a[href^="#project-"]::before {
   content: '';
   position: absolute;
   inset: 0;
@@ -1768,63 +1763,35 @@ body.project-view #main .close:before {
   pointer-events: none;
 }
 
-#projects .projects-grid > a:hover,
-#projects .project-grid > a:hover,
-#projects .tiles > a:hover,
-#projects .projects > a:hover,
-#projects a.project-tile:hover,
-#projects a.tile:hover,
-#projects a.project-card:hover {
+#projects a[href^="#project-"]:hover {
   transform: translateY(-2px);
   background: rgba(255, 255, 255, 0.085);
   border-color: rgba(255, 255, 255, 0.28);
 }
 
 /* Tile headings + descriptions */
-#projects .projects-grid > a h3,
-#projects .project-grid > a h3,
-#projects .tiles > a h3,
-#projects .projects > a h3,
-#projects a.project-tile h3,
-#projects a.tile h3,
-#projects a.project-card h3 {
+#projects a[href^="#project-"] h3 {
   margin: 0 0 0.35rem 0;
   letter-spacing: 0.3rem;
   font-size: 0.9rem;
 }
 
-#projects .projects-grid > a p,
-#projects .project-grid > a p,
-#projects .tiles > a p,
-#projects .projects > a p,
-#projects a.project-tile p,
-#projects a.tile p,
-#projects a.project-card p {
+#projects a[href^="#project-"] p {
   margin: 0;
   opacity: 0.8;
   font-size: 0.9rem;
   line-height: 1.4;
 }
 
-/* Mobile: single column */
+/* Mobile: tighter padding */
 @media screen and (max-width: 736px) {
-  #projects .projects-grid,
-  #projects .project-grid,
-  #projects .tiles,
-  #projects .projects {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-
-  #projects .projects-grid > a,
-  #projects .project-grid > a,
-  #projects .tiles > a,
-  #projects .projects > a,
-  #projects a.project-tile,
-  #projects a.tile,
-  #projects a.project-card {
+  #projects a[href^="#project-"] {
     padding: 1.25rem;
     min-height: 7rem;
+  }
+
+  #projects a[href^="#project-"] + a[href^="#project-"] {
+    margin-top: 1rem;
   }
 }
 
