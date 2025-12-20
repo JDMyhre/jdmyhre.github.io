@@ -1708,23 +1708,49 @@ body.project-view #main .close:before {
 
 
 
+
+
 /* =========================================
-   Projects tiles: consistent full-width list
-   (works even as you add many projects)
+   Projects tiles: 2-column grid on desktop,
+   1-column on mobile (scales to any # of projects)
    ========================================= */
 
-/* Make each project tile full-width and normalize spacing.
-   We target only the project links (href starting with "#project-")
-   so other links like "Back to Projects" are unaffected. */
+/* Put the project links into a predictable grid.
+   This targets the common wrapper div you’re using in Projects.
+   (Use any of these class names on the wrapper: projects-grid / tiles / projects / project-grid) */
+#projects .projects-grid,
+#projects .tiles,
+#projects .projects,
+#projects .project-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+  margin-top: 2rem;
+  align-items: stretch;
+}
+
+/* If your template happens to wrap tiles in list items, make those transparent to the grid */
+#projects .projects-grid > li,
+#projects .tiles > li,
+#projects .projects > li,
+#projects .project-grid > li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* The tiles themselves: target only project tiles by href prefix */
 #projects a[href^="#project-"] {
   position: relative;
-  display: block;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 
   width: 100%;
   min-height: 7.5rem;
   padding: 1.5rem;
 
-  margin: 0;              /* remove any inherited/inline spacing */
+  margin: 0;
   box-sizing: border-box;
 
   border-radius: 6px;
@@ -1732,26 +1758,12 @@ body.project-view #main .close:before {
   background: rgba(255, 255, 255, 0.06);
 
   text-decoration: none;
-  border-bottom: none;    /* override global dotted underline */
+  border-bottom: none; /* override global dotted underline */
   overflow: hidden;
 
   transition: transform 0.15s ease-in-out,
               background-color 0.15s ease-in-out,
               border-color 0.15s ease-in-out;
-}
-
-/* Enforce perfectly consistent vertical spacing between tiles,
-   regardless of wrappers or accidental extra margins. */
-#projects a[href^="#project-"] + a[href^="#project-"] {
-  margin-top: 1.25rem;
-}
-
-/* Optional: if tiles are wrapped in a container, remove container spacing quirks */
-#projects .projects-grid,
-#projects .project-grid,
-#projects .tiles,
-#projects .projects {
-  margin-top: 2rem;
 }
 
 /* Subtle sheen so tiles look like cards */
@@ -1783,15 +1795,19 @@ body.project-view #main .close:before {
   line-height: 1.4;
 }
 
-/* Mobile: tighter padding */
+/* Mobile: one column */
 @media screen and (max-width: 736px) {
+  #projects .projects-grid,
+  #projects .tiles,
+  #projects .projects,
+  #projects .project-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
   #projects a[href^="#project-"] {
     padding: 1.25rem;
     min-height: 7rem;
-  }
-
-  #projects a[href^="#project-"] + a[href^="#project-"] {
-    margin-top: 1rem;
   }
 }
 
