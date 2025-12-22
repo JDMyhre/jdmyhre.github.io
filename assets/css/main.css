@@ -1811,15 +1811,20 @@ body.project-view #main .close:before {
   }
 }
 
+/* Resume image display */
 .resume-image {
-  margin-top: 2rem;
-  max-width: 900px;
+  margin: 2rem auto 0;
+  max-width: 850px;   /* controls how big it can get */
+  width: 100%;
 }
 
 .resume-image img {
   width: 100%;
   height: auto;
+  display: block;
+
   border-radius: 6px;
+  background: white; /* important for dark theme */
   box-shadow: 0 0 0 1px rgba(255,255,255,0.15);
 }
 
