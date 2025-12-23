@@ -1846,6 +1846,21 @@ body.project-view #main .close:before {
   }
 }
 
+/* Mobile: force major headings to wrap (HTML5 UP sometimes re-applies nowrap in mobile breakpoints) */
+@media screen and (max-width: 736px) {
+  #main article h2.major {
+    white-space: normal !important;
+    display: inline-block;       /* helps underline/width behave with wrapping */
+    width: 100%;
+    overflow: visible;
+    overflow-wrap: anywhere;
+    word-break: break-word;      /* more aggressive for mobile */
+    hyphens: auto;
+    line-height: 1.25;
+  }
+}
+
+
 
 
 
