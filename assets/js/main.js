@@ -398,4 +398,15 @@
 						$main._show(location.hash.substr(1), true);
 					});
 
+
 })(jQuery);
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('video.hero-once').forEach((v) => {
+    v.addEventListener('ended', () => {
+      // Force “freeze” on last frame
+      v.pause();
+      v.currentTime = Math.max(0, v.duration - 0.05);
+    });
+  });
+});
