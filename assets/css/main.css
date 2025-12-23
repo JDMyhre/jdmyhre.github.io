@@ -1828,6 +1828,13 @@ body.project-view #main .close:before {
   box-shadow: 0 0 0 1px rgba(255,255,255,0.15);
 }
 
+/* Hero video behaves like hero image */
+.image.main video.hero-once {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 
 
 
