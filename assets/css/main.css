@@ -1828,6 +1828,24 @@ body.project-view #main .close:before {
   box-shadow: 0 0 0 1px rgba(255,255,255,0.15);
 }
 
+/* Allow long project titles to wrap cleanly (desktop + mobile) */
+#main article h2.major {
+  white-space: normal !important;      /* undo nowrap */
+  overflow-wrap: anywhere;             /* wrap long strings if needed */
+  word-break: normal;
+  hyphens: auto;                       /* nicer wraps when possible */
+  max-width: 100%;
+}
+
+/* Optional: slightly reduce size on small screens so it doesn't look huge */
+@media screen and (max-width: 736px) {
+  #main article h2.major {
+    font-size: 1.35rem;                /* tune if you want */
+    letter-spacing: 0.25rem;           /* tune if you want */
+    line-height: 1.25;
+  }
+}
+
 
 
 
