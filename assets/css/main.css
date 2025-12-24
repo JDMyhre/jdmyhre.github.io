@@ -1860,6 +1860,18 @@ body.project-view #main .close:before {
   }
 }
 
+/* Remove dark overlay on project images */
+.image:before,
+.image:after {
+  display: none !important;
+}
+
+/* Ensure images render at true brightness */
+.image img {
+  filter: none !important;
+  opacity: 1 !important;
+}
+
 
 
 
