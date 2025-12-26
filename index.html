@@ -236,11 +236,30 @@
 
 					<h3>Chassis</h3>
 
-					<div class="gallery">
-					  <img src="images/subformica/sub-1.jpg" alt="sub 1" loading="lazy">
-					  <img src="images/subformica/sub-2.jpg" alt="sub 2" loading="lazy">
-					  <img src="images/subformica/sub-3.jpg" alt="sub 3" loading="lazy">
+					<div class="carousel" data-carousel>
+					  <button class="carousel__btn carousel__btn--prev" type="button" aria-label="Previous image" data-carousel-prev>
+					    ‹
+					  </button>
+					
+					  <div class="carousel__viewport" data-carousel-viewport>
+					    <div class="carousel__track" data-carousel-track>
+					      <div class="carousel__slide">
+					        <img src="images/subformica/sub-1.jpg" alt="Chassis overview" loading="lazy">
+					      </div>
+					      <div class="carousel__slide">
+					        <img src="images/subformica/sub-2.jpg" alt="Chassis wiring" loading="lazy">
+					      </div>
+					      <div class="carousel__slide">
+					        <img src="images/subformica/sub-3.jpg" alt="Chassis in pool" loading="lazy">
+					      </div>
+					    </div>
+					  </div>
+					
+					  <button class="carousel__btn carousel__btn--next" type="button" aria-label="Next image" data-carousel-next>
+					    ›
+					  </button>
 					</div>
+
 					
 				</article>
 				
@@ -471,6 +490,7 @@
 
 	</body>
 </html>
+
 
 
 
