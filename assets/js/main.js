@@ -403,62 +403,68 @@
 	
 	  carousels.forEach((carousel) => {
 	    const track = carousel.querySelector("[data-carousel-track]");
-	    const slides = Array.from(track.children);
+	    const slides = Array.from(track.querySelectorAll(".carousel__slide"));
 	    const prevBtn = carousel.querySelector("[data-carousel-prev]");
 	    const nextBtn = carousel.querySelector("[data-carousel-next]");
 	    const viewport = carousel.querySelector("[data-carousel-viewport]");
+	    const counter = carousel.querySelector("[data-carousel-counter]");
 	
 	    let index = 0;
 	
-	    // Mark slide count for CSS (hide arrows if 1)
-	    carousel.setAttribute("data-slides", String(slides.length));
+	    const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
 	
 	    const update = () => {
-	      track.style.transform = `translateX(-${index * 100}%)`;
-	      prevBtn.disabled = index === 0;
-	      nextBtn.disabled = index === slides.length - 1;
-	      prevBtn.style.opacity = prevBtn.disabled ? "0.35" : "1";
-	      nextBtn.style.opacity = nextBtn.disabled ? "0.35" : "1";
+	      index = clamp(index, 0, slides.length - 1);
+	      track.style.transform = `translate3d(-${index * 100}%, 0, 0)`;
+	
+	      if (prevBtn && nextBtn) {
+	        prevBtn.disabled = index === 0;
+	        nextBtn.disabled = index === slides.length - 1;
+	      }
+	
+	      if (counter) counter.textContent = `${index + 1}/${slides.length}`;
 	    };
 	
-	    prevBtn.addEventListener("click", () => {
-	      index = Math.max(0, index - 1);
-	      update();
-	    });
+	    // Buttons
+	    if (prevBtn) prevBtn.addEventListener("click", () => { index--; update(); });
+	    if (nextBtn) nextBtn.addEventListener("click", () => { index++; update(); });
 	
-	    nextBtn.addEventListener("click", () => {
-	      index = Math.min(slides.length - 1, index + 1);
-	      update();
-	    });
-	
-	    // Swipe support (mobile + trackpads)
+	    // Swipe (pointer events)
 	    let startX = 0;
-	    let isDown = false;
+	    let startY = 0;
+	    let dragging = false;
 	
 	    viewport.addEventListener("pointerdown", (e) => {
-	      isDown = true;
+	      dragging = true;
 	      startX = e.clientX;
+	      startY = e.clientY;
 	      viewport.setPointerCapture(e.pointerId);
 	    });
 	
 	    viewport.addEventListener("pointerup", (e) => {
-	      if (!isDown) return;
-	      isDown = false;
-	      const dx = e.clientX - startX;
+	      if (!dragging) return;
+	      dragging = false;
 	
-	      // swipe threshold
-	      if (dx > 40) index = Math.max(0, index - 1);
-	      if (dx < -40) index = Math.min(slides.length - 1, index + 1);
+	      const dx = e.clientX - startX;
+	      const dy = e.clientY - startY;
+	
+	      // Ignore mostly-vertical gestures (so scrolling the page doesn't accidentally slide)
+	      if (Math.abs(dy) > Math.abs(dx)) return;
+	
+	      // Threshold
+	      if (dx > 40) index--;
+	      if (dx < -40) index++;
 	      update();
 	    });
 	
-	    viewport.addEventListener("pointercancel", () => { isDown = false; });
+	    viewport.addEventListener("pointercancel", () => { dragging = false; });
 	
-	    // Reapply on load
+	    // Initialize
 	    update();
 	  });
 	})();
 
 
 })(jQuery);
+
 
