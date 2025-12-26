@@ -1872,6 +1872,46 @@ body.project-view #main .close:before {
   opacity: 1 !important;
 }
 
+/* Swipeable horizontal gallery */
+.gallery {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(260px, 1fr);
+  gap: 1rem;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.5rem 0.25rem 1rem;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+
+  border-radius: 8px;
+}
+
+.gallery img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+
+  border-radius: 8px;
+  scroll-snap-align: start;
+
+  /* keep your images true-to-upload */
+  filter: none !important;
+  opacity: 1 !important;
+}
+
+/* Make it feel good on small screens */
+@media screen and (max-width: 736px) {
+  .gallery {
+    grid-auto-columns: 85%;
+  }
+  .gallery img {
+    height: 220px;
+  }
+}
+
+
 
 
 
