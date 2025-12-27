@@ -1962,3 +1962,7 @@ body.project-view #main .close:before {
     line-height: 46px;
   }
 }
+
+.carousel__btn { z-index: 9999; pointer-events: auto; }
+.carousel__counter { z-index: 9999; pointer-events: none; }
+
