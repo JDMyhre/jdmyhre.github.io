@@ -402,6 +402,7 @@
 (function () {
   function getEls(carousel) {
     return {
+      viewport: carousel.querySelector("[data-carousel-viewport]"),
       track: carousel.querySelector("[data-carousel-track]"),
       slides: carousel.querySelectorAll(".carousel__slide"),
       prev: carousel.querySelector("[data-carousel-prev]"),
@@ -419,11 +420,9 @@
 
     track.style.transform = `translateX(-${index * 100}%)`;
 
-    if (counter) {
-      counter.textContent = `${index + 1}/${total}`;
-    }
+    if (counter) counter.textContent = `${index + 1}/${total}`;
 
-    // Disable arrows at ends (cleaner UX, no wraparound)
+    // Disable arrows at ends (no wrap)
     if (prev) prev.disabled = index === 0;
     if (next) next.disabled = index === total - 1;
   }
@@ -436,9 +435,7 @@
     if (total === 0) return;
 
     index = index + dir;
-
-    // Clamp (no wrap)
-    index = Math.max(0, Math.min(index, total - 1));
+    index = Math.max(0, Math.min(index, total - 1)); // clamp
 
     carousel.dataset.index = index;
     update(carousel);
@@ -449,9 +446,9 @@
     carousel.dataset.carouselInit = "1";
     if (!carousel.dataset.index) carousel.dataset.index = "0";
 
-    const { prev, next, track } = getEls(carousel);
+    const { viewport, prev, next } = getEls(carousel);
 
-    // Button clicks
+    // Arrow buttons (desktop + mobile)
     prev?.addEventListener("click", (e) => {
       e.preventDefault();
       step(carousel, -1);
@@ -462,30 +459,51 @@
       step(carousel, +1);
     });
 
-    // Touch-only swipe support (keeps desktop clicks clean)
-    let startX = 0;
-    let isTouch = false;
+    // Swipe (pointer events), but ONLY when pointerType is touch/pen
+    if (viewport) {
+      let startX = 0;
+      let startY = 0;
+      let active = false;
+      let pointerId = null;
+      let pointerType = "";
 
-    track?.addEventListener(
-      "touchstart",
-      (e) => {
-        isTouch = true;
-        startX = e.touches[0].clientX;
-      },
-      { passive: true }
-    );
+      viewport.addEventListener("pointerdown", (e) => {
+        // Don’t treat mouse drag as swipe (keeps desktop clicks clean)
+        pointerType = e.pointerType || "";
+        if (pointerType === "mouse") return;
 
-    track?.addEventListener("touchend", (e) => {
-      if (!isTouch) return;
+        active = true;
+        pointerId = e.pointerId;
+        startX = e.clientX;
+        startY = e.clientY;
 
-      const dx = e.changedTouches[0].clientX - startX;
+        // Capture is fine for touch/pen and helps consistency on mobile
+        try {
+          viewport.setPointerCapture(pointerId);
+        } catch (_) {}
+      });
 
-      if (Math.abs(dx) > 40) {
-        step(carousel, dx > 0 ? -1 : +1);
-      }
+      viewport.addEventListener("pointerup", (e) => {
+        if (!active) return;
+        if (pointerId !== null && e.pointerId !== pointerId) return;
 
-      isTouch = false;
-    });
+        active = false;
+
+        const dx = e.clientX - startX;
+        const dy = e.clientY - startY;
+
+        // If it was mostly vertical, it's a scroll, ignore
+        if (Math.abs(dy) > Math.abs(dx)) return;
+
+        if (dx > 40) step(carousel, -1);
+        if (dx < -40) step(carousel, +1);
+      });
+
+      viewport.addEventListener("pointercancel", () => {
+        active = false;
+        pointerId = null;
+      });
+    }
 
     update(carousel);
   }
@@ -500,6 +518,7 @@
 
 
 })(jQuery);
+
 
 
 
