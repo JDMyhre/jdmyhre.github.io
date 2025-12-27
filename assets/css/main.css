@@ -1984,4 +1984,10 @@ body.project-view #main .close:before {
   pointer-events: auto;
 }
 
+/* Make carousel arrows clickable above template overlays */
+.carousel__btn {
+  z-index: 9999 !important;
+  pointer-events: auto !important;
+}
+
 
