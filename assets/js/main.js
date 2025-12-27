@@ -398,124 +398,89 @@
 						$main._show(location.hash.substr(1), true);
 					});
 
-/* === Carousel (single-image slider w/ arrows + swipe + counter) === */
 (function () {
-  const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
-
   function getEls(carousel) {
-    const viewport = carousel.querySelector("[data-carousel-viewport]");
-    const track = carousel.querySelector("[data-carousel-track]");
-    const slides = track ? Array.from(track.querySelectorAll(".carousel__slide")) : [];
-    const counter = carousel.querySelector("[data-carousel-counter]");
-    const prevBtn = carousel.querySelector("[data-carousel-prev]");
-    const nextBtn = carousel.querySelector("[data-carousel-next]");
-    return { viewport, track, slides, counter, prevBtn, nextBtn };
+    return {
+      track: carousel.querySelector("[data-carousel-track]"),
+      slides: carousel.querySelectorAll(".carousel__slide"),
+      prev: carousel.querySelector("[data-carousel-prev]"),
+      next: carousel.querySelector("[data-carousel-next]"),
+      counter: carousel.querySelector("[data-carousel-counter]")
+    };
   }
 
   function update(carousel) {
-    const { track, slides, counter, prevBtn, nextBtn } = getEls(carousel);
-    if (!track || slides.length === 0) return;
+    const { track, slides, counter } = getEls(carousel);
+    const index = Number(carousel.dataset.index || 0);
+    const total = slides.length;
 
-    let index = parseInt(carousel.getAttribute("data-index") || "0", 10);
-    index = clamp(index, 0, slides.length - 1);
-    carousel.setAttribute("data-index", String(index));
+    track.style.transform = `translateX(-${index * 100}%)`;
 
-    track.style.transform = `translate3d(-${index * 100}%, 0, 0)`;
-
-    if (prevBtn) prevBtn.disabled = index === 0;
-    if (nextBtn) nextBtn.disabled = index === slides.length - 1;
-    if (counter) counter.textContent = `${index + 1}/${slides.length}`;
+    if (counter) {
+      counter.textContent = `${index + 1}/${total}`;
+    }
   }
 
   function step(carousel, dir) {
     const { slides } = getEls(carousel);
-    if (!slides.length) return;
+    let index = Number(carousel.dataset.index || 0);
+    const total = slides.length;
 
-    let index = parseInt(carousel.getAttribute("data-index") || "0", 10);
-    index = clamp(index + dir, 0, slides.length - 1);
-    carousel.setAttribute("data-index", String(index));
+    index = (index + dir + total) % total;
+    carousel.dataset.index = index;
     update(carousel);
   }
 
   function initCarousel(carousel) {
-    if (carousel.getAttribute("data-carousel-init") === "1") {
-      update(carousel);
-      return;
-    }
-    carousel.setAttribute("data-carousel-init", "1");
-    if (!carousel.hasAttribute("data-index")) carousel.setAttribute("data-index", "0");
+    if (carousel.dataset.carouselInit === "1") return;
+    carousel.dataset.carouselInit = "1";
+    carousel.dataset.index = carousel.dataset.index || "0";
 
-    const { viewport, prevBtn, nextBtn } = getEls(carousel);
+    const { prev, next, track } = getEls(carousel);
+
+    // Button clicks (desktop & mobile)
+    prev?.addEventListener("click", (e) => {
+      e.preventDefault();
+      step(carousel, -1);
+    });
+
+    next?.addEventListener("click", (e) => {
+      e.preventDefault();
+      step(carousel, +1);
+    });
+
+    // Touch-only swipe support
+    let startX = 0;
+    let isTouch = false;
+
+    track.addEventListener("touchstart", (e) => {
+      isTouch = true;
+      startX = e.touches[0].clientX;
+    }, { passive: true });
+
+    track.addEventListener("touchend", (e) => {
+      if (!isTouch) return;
+      const dx = e.changedTouches[0].clientX - startX;
+      if (Math.abs(dx) > 40) {
+        step(carousel, dx > 0 ? -1 : +1);
+      }
+      isTouch = false;
+    });
+
     update(carousel);
-
-    // Button handlers (direct)
-    if (prevBtn) {
-      prevBtn.addEventListener("click", (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        e.stopImmediatePropagation(); // IMPORTANT: prevents template handlers from swallowing clicks
-        step(carousel, -1);
-      });
-    }
-
-    if (nextBtn) {
-      nextBtn.addEventListener("click", (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        e.stopImmediatePropagation(); // IMPORTANT: prevents template handlers from swallowing clicks
-        step(carousel, +1);
-      });
-    }
-
-    // Swipe handlers (pointer events)
-    if (viewport) {
-      let startX = 0;
-      let startY = 0;
-      let dragging = false;
-
-      viewport.addEventListener("pointerdown", (e) => {
-        dragging = true;
-        startX = e.clientX;
-        startY = e.clientY;
-        viewport.setPointerCapture(e.pointerId);
-      });
-
-      viewport.addEventListener("pointerup", (e) => {
-        if (!dragging) return;
-        dragging = false;
-
-        const dx = e.clientX - startX;
-        const dy = e.clientY - startY;
-
-        // If user is mostly scrolling vertically, ignore
-        if (Math.abs(dy) > Math.abs(dx)) return;
-
-        if (dx > 40) step(carousel, -1);
-        if (dx < -40) step(carousel, +1);
-      });
-
-      viewport.addEventListener("pointercancel", () => {
-        dragging = false;
-      });
-    }
   }
 
   function initAll() {
     document.querySelectorAll("[data-carousel]").forEach(initCarousel);
   }
 
-  // Run on load and when HTML5 UP swaps articles via hash
   window.addEventListener("load", initAll);
   window.addEventListener("hashchange", () => setTimeout(initAll, 50));
-
-  // Also run after resize (keeps things stable)
-  window.addEventListener("resize", () => initAll());
 })();
 
 
-
-
 })(jQuery);
+
 
 
 
