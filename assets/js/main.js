@@ -398,6 +398,7 @@
 						$main._show(location.hash.substr(1), true);
 					});
 
+/* === Carousel (arrows + swipe + counter, NO wraparound, disabled arrows at ends) === */
 (function () {
   function getEls(carousel) {
     return {
@@ -410,15 +411,21 @@
   }
 
   function update(carousel) {
-    const { track, slides, counter } = getEls(carousel);
+    const { track, slides, counter, prev, next } = getEls(carousel);
     const index = Number(carousel.dataset.index || 0);
     const total = slides.length;
+
+    if (!track || total === 0) return;
 
     track.style.transform = `translateX(-${index * 100}%)`;
 
     if (counter) {
       counter.textContent = `${index + 1}/${total}`;
     }
+
+    // Disable arrows at ends (cleaner UX, no wraparound)
+    if (prev) prev.disabled = index === 0;
+    if (next) next.disabled = index === total - 1;
   }
 
   function step(carousel, dir) {
@@ -426,7 +433,13 @@
     let index = Number(carousel.dataset.index || 0);
     const total = slides.length;
 
-    index = (index + dir + total) % total;
+    if (total === 0) return;
+
+    index = index + dir;
+
+    // Clamp (no wrap)
+    index = Math.max(0, Math.min(index, total - 1));
+
     carousel.dataset.index = index;
     update(carousel);
   }
@@ -434,11 +447,11 @@
   function initCarousel(carousel) {
     if (carousel.dataset.carouselInit === "1") return;
     carousel.dataset.carouselInit = "1";
-    carousel.dataset.index = carousel.dataset.index || "0";
+    if (!carousel.dataset.index) carousel.dataset.index = "0";
 
     const { prev, next, track } = getEls(carousel);
 
-    // Button clicks (desktop & mobile)
+    // Button clicks
     prev?.addEventListener("click", (e) => {
       e.preventDefault();
       step(carousel, -1);
@@ -449,21 +462,28 @@
       step(carousel, +1);
     });
 
-    // Touch-only swipe support
+    // Touch-only swipe support (keeps desktop clicks clean)
     let startX = 0;
     let isTouch = false;
 
-    track.addEventListener("touchstart", (e) => {
-      isTouch = true;
-      startX = e.touches[0].clientX;
-    }, { passive: true });
+    track?.addEventListener(
+      "touchstart",
+      (e) => {
+        isTouch = true;
+        startX = e.touches[0].clientX;
+      },
+      { passive: true }
+    );
 
-    track.addEventListener("touchend", (e) => {
+    track?.addEventListener("touchend", (e) => {
       if (!isTouch) return;
+
       const dx = e.changedTouches[0].clientX - startX;
+
       if (Math.abs(dx) > 40) {
         step(carousel, dx > 0 ? -1 : +1);
       }
+
       isTouch = false;
     });
 
@@ -480,6 +500,7 @@
 
 
 })(jQuery);
+
 
 
 
