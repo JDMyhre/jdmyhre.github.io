@@ -1966,3 +1966,22 @@ body.project-view #main .close:before {
 .carousel__btn { z-index: 9999; pointer-events: auto; }
 .carousel__counter { z-index: 9999; pointer-events: none; }
 
+/* Ensure carousel arrows are actually clickable on desktop */
+.carousel__btn {
+  z-index: 9999 !important;
+  pointer-events: auto !important;
+}
+
+.carousel__viewport,
+.carousel__track,
+.carousel__slide,
+.carousel__slide img {
+  pointer-events: none;
+}
+
+/* but allow swiping/clicking inside viewport area (not needed for buttons) */
+.carousel__viewport {
+  pointer-events: auto;
+}
+
+
