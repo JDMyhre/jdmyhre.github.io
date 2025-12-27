@@ -401,17 +401,19 @@
 	(function () {
 	  const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
 	
-	  function getCarouselState(carousel) {
+	  function getEls(carousel) {
+	    const viewport = carousel.querySelector("[data-carousel-viewport]");
 	    const track = carousel.querySelector("[data-carousel-track]");
-	    const slides = Array.from(track.querySelectorAll(".carousel__slide"));
+	    const slides = track ? Array.from(track.querySelectorAll(".carousel__slide")) : [];
 	    const counter = carousel.querySelector("[data-carousel-counter]");
 	    const prevBtn = carousel.querySelector("[data-carousel-prev]");
 	    const nextBtn = carousel.querySelector("[data-carousel-next]");
-	    return { track, slides, counter, prevBtn, nextBtn };
+	    return { viewport, track, slides, counter, prevBtn, nextBtn };
 	  }
 	
-	  function updateCarousel(carousel) {
-	    const { track, slides, counter, prevBtn, nextBtn } = getCarouselState(carousel);
+	  function update(carousel) {
+	    const { track, slides, counter, prevBtn, nextBtn } = getEls(carousel);
+	    if (!track || slides.length === 0) return;
 	
 	    let index = parseInt(carousel.getAttribute("data-index") || "0", 10);
 	    index = clamp(index, 0, slides.length - 1);
@@ -419,58 +421,98 @@
 	
 	    track.style.transform = `translate3d(-${index * 100}%, 0, 0)`;
 	
-	    if (prevBtn && nextBtn) {
-	      prevBtn.disabled = index === 0;
-	      nextBtn.disabled = index === slides.length - 1;
-	    }
+	    if (prevBtn) prevBtn.disabled = index === 0;
+	    if (nextBtn) nextBtn.disabled = index === slides.length - 1;
 	    if (counter) counter.textContent = `${index + 1}/${slides.length}`;
 	  }
 	
-	  // Initialize all carousels (call on load + after opening an article)
-	  function initAllCarousels() {
-	    document.querySelectorAll("[data-carousel]").forEach((carousel) => {
-	      if (!carousel.hasAttribute("data-index")) carousel.setAttribute("data-index", "0");
-	      updateCarousel(carousel);
-	    });
-	  }
-	
-	  // --- Click handling for arrows (delegated) ---
-	  document.addEventListener("click", (e) => {
-	    const prev = e.target.closest("[data-carousel-prev]");
-	    const next = e.target.closest("[data-carousel-next]");
-	    if (!prev && !next) return;
-	
-	    // IMPORTANT: stop HTML5 UP modal handlers from swallowing this click
-	    e.preventDefault();
-	    e.stopPropagation();
-	
-	    const carousel = (prev || next).closest("[data-carousel]");
-	    if (!carousel) return;
+	  function step(carousel, dir) {
+	    const { slides } = getEls(carousel);
+	    if (!slides.length) return;
 	
 	    let index = parseInt(carousel.getAttribute("data-index") || "0", 10);
-	    const { slides } = getCarouselState(carousel);
-	
-	    if (prev) index -= 1;
-	    if (next) index += 1;
-	
-	    index = clamp(index, 0, slides.length - 1);
+	    index = clamp(index + dir, 0, slides.length - 1);
 	    carousel.setAttribute("data-index", String(index));
-	    updateCarousel(carousel);
-	  });
+	    update(carousel);
+	  }
 	
-	  // Run on initial page load
-	  window.addEventListener("load", initAllCarousels);
+	  function initCarousel(carousel) {
+	    if (carousel.getAttribute("data-carousel-init") === "1") {
+	      update(carousel);
+	      return;
+	    }
+	    carousel.setAttribute("data-carousel-init", "1");
+	    if (!carousel.hasAttribute("data-index")) carousel.setAttribute("data-index", "0");
 	
-	  // ALSO run after hash navigation changes (HTML5 UP shows articles via hash)
-	  window.addEventListener("hashchange", () => {
-	    // small delay to allow the article to become visible
-	    setTimeout(initAllCarousels, 50);
-	  });
+	    const { viewport, prevBtn, nextBtn } = getEls(carousel);
+	    update(carousel);
+	
+	    // Button handlers (direct)
+	    if (prevBtn) {
+	      prevBtn.addEventListener("click", (e) => {
+	        e.preventDefault();
+	        e.stopPropagation();
+	        step(carousel, -1);
+	      });
+	    }
+	
+	    if (nextBtn) {
+	      nextBtn.addEventListener("click", (e) => {
+	        e.preventDefault();
+	        e.stopPropagation();
+	        step(carousel, +1);
+	      });
+	    }
+	
+	    // Swipe handlers (pointer events)
+	    if (viewport) {
+	      let startX = 0;
+	      let startY = 0;
+	      let dragging = false;
+	
+	      viewport.addEventListener("pointerdown", (e) => {
+	        dragging = true;
+	        startX = e.clientX;
+	        startY = e.clientY;
+	        viewport.setPointerCapture(e.pointerId);
+	      });
+	
+	      viewport.addEventListener("pointerup", (e) => {
+	        if (!dragging) return;
+	        dragging = false;
+	
+	        const dx = e.clientX - startX;
+	        const dy = e.clientY - startY;
+	
+	        // If user is mostly scrolling vertically, ignore
+	        if (Math.abs(dy) > Math.abs(dx)) return;
+	
+	        if (dx > 40) step(carousel, -1);
+	        if (dx < -40) step(carousel, +1);
+	      });
+	
+	      viewport.addEventListener("pointercancel", () => {
+	        dragging = false;
+	      });
+	    }
+	  }
+	
+	  function initAll() {
+	    document.querySelectorAll("[data-carousel]").forEach(initCarousel);
+	  }
+	
+	  // Run on load and when HTML5 UP swaps articles via hash
+	  window.addEventListener("load", initAll);
+	  window.addEventListener("hashchange", () => setTimeout(initAll, 50));
+	
+	  // Also run after resize (keeps things stable)
+	  window.addEventListener("resize", () => initAll());
 	})();
 
 
 
 })(jQuery);
+
 
 
 
