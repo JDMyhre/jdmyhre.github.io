@@ -1711,13 +1711,11 @@ body.project-view #main .close:before {
 
 
 /* =========================================
-   Projects tiles: 2-column grid on desktop,
-   1-column on mobile (scales to any # of projects)
+   Projects tiles: clean (no border) + legible title gradient
+   2-column desktop, 1-column mobile (scales to any # of projects)
    ========================================= */
 
-/* Put the project links into a predictable grid.
-   This targets the common wrapper div you’re using in Projects.
-   (Use any of these class names on the wrapper: projects-grid / tiles / projects / project-grid) */
+/* Grid wrapper (supports multiple possible wrapper class names) */
 #projects .projects-grid,
 #projects .tiles,
 #projects .projects,
@@ -1729,7 +1727,7 @@ body.project-view #main .close:before {
   align-items: stretch;
 }
 
-/* If your template happens to wrap tiles in list items, make those transparent to the grid */
+/* If tiles are wrapped in list items, keep LI invisible to the grid */
 #projects .projects-grid > li,
 #projects .tiles > li,
 #projects .projects > li,
@@ -1749,50 +1747,67 @@ body.project-view #main .close:before {
   width: 100%;
   min-height: 7.5rem;
   padding: 1.5rem;
-
   margin: 0;
   box-sizing: border-box;
 
-  border-radius: 6px;
-  border: solid 1px rgba(255, 255, 255, 0.18);
-  background: rgba(255, 255, 255, 0.06);
+  /* Clean look: no border “frame” */
+  border: 0;
+  border-radius: 10px;
+  box-shadow: none;
+
+  /* Keep a tiny base tint so text is readable even if a tile has no image */
+  background: rgba(255, 255, 255, 0.03);
 
   text-decoration: none;
   border-bottom: none; /* override global dotted underline */
   overflow: hidden;
 
   transition: transform 0.15s ease-in-out,
-              background-color 0.15s ease-in-out,
-              border-color 0.15s ease-in-out;
+              background-color 0.15s ease-in-out;
 }
 
-/* Subtle sheen so tiles look like cards */
-#projects a[href^="#project-"]::before {
-  content: '';
+/* Bottom gradient overlay for text legibility (works over images OR plain backgrounds) */
+#projects a[href^="#project-"]::after {
+  content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.70),
+    rgba(0, 0, 0, 0.30) 35%,
+    rgba(0, 0, 0, 0.00) 65%
+  );
   pointer-events: none;
 }
 
+/* Keep tile text above the gradient */
+#projects a[href^="#project-"] h3,
+#projects a[href^="#project-"] p {
+  position: relative;
+  z-index: 1;
+}
+
+/* Hover: subtle lift + slightly brighter base */
 #projects a[href^="#project-"]:hover {
   transform: translateY(-2px);
-  background: rgba(255, 255, 255, 0.085);
-  border-color: rgba(255, 255, 255, 0.28);
+  background: rgba(255, 255, 255, 0.05);
 }
 
 /* Tile headings + descriptions */
 #projects a[href^="#project-"] h3 {
   margin: 0 0 0.35rem 0;
-  letter-spacing: 0.3rem;
-  font-size: 0.9rem;
+  letter-spacing: 0.28rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #fff;
 }
 
 #projects a[href^="#project-"] p {
   margin: 0;
-  opacity: 0.8;
+  opacity: 0.85;
   font-size: 0.9rem;
   line-height: 1.4;
+  color: #fff;
 }
 
 /* Mobile: one column */
@@ -1811,68 +1826,11 @@ body.project-view #main .close:before {
   }
 }
 
-/* Resume image display */
-.resume-image {
-  margin: 2rem auto 0;
-  max-width: 850px;   /* controls how big it can get */
-  width: 100%;
-}
 
-.resume-image img {
-  width: 100%;
-  height: auto;
-  display: block;
+/* =========================================
+   Carousel: cleaned (no duplicate z-index / pointer-events blocks)
+   ========================================= */
 
-  border-radius: 6px;
-  background: white; /* important for dark theme */
-  box-shadow: 0 0 0 1px rgba(255,255,255,0.15);
-}
-
-/* Allow long project titles to wrap cleanly (desktop + mobile) */
-#main article h2.major {
-  white-space: normal !important;      /* undo nowrap */
-  overflow-wrap: anywhere;             /* wrap long strings if needed */
-  word-break: normal;
-  hyphens: auto;                       /* nicer wraps when possible */
-  max-width: 100%;
-}
-
-/* Optional: slightly reduce size on small screens so it doesn't look huge */
-@media screen and (max-width: 736px) {
-  #main article h2.major {
-    font-size: 1.35rem;                /* tune if you want */
-    letter-spacing: 0.25rem;           /* tune if you want */
-    line-height: 1.25;
-  }
-}
-
-/* Mobile: force major headings to wrap (HTML5 UP sometimes re-applies nowrap in mobile breakpoints) */
-@media screen and (max-width: 736px) {
-  #main article h2.major {
-    white-space: normal !important;
-    display: inline-block;       /* helps underline/width behave with wrapping */
-    width: 100%;
-    overflow: visible;
-    overflow-wrap: anywhere;
-    word-break: break-word;      /* more aggressive for mobile */
-    hyphens: auto;
-    line-height: 1.25;
-  }
-}
-
-/* Remove dark overlay on project images */
-.image:before,
-.image:after {
-  display: none !important;
-}
-
-/* Ensure images render at true brightness */
-.image img {
-  filter: none !important;
-  opacity: 1 !important;
-}
-
-/* --- Carousel: single image at a time, responsive, mobile-safe --- */
 .carousel { margin: 1.25rem 0; }
 
 .carousel__viewport {
@@ -1881,7 +1839,7 @@ body.project-view #main .close:before {
   border-radius: 10px;
   width: 100%;
 
-  /* This enforces a consistent visible area and prevents "giant image" on mobile */
+  /* Your current enforced display window */
   aspect-ratio: 16 / 9;
   background: rgba(255,255,255,0.03);
 }
@@ -1891,7 +1849,7 @@ body.project-view #main .close:before {
   height: 100%;
   transition: transform 250ms ease;
   will-change: transform;
-  touch-action: pan-y; /* allow vertical scroll; we handle horizontal swipe */
+  touch-action: pan-y; /* allow vertical scroll; JS handles horizontal swipe */
 }
 
 .carousel__slide {
@@ -1924,7 +1882,7 @@ body.project-view #main .close:before {
   line-height: 42px;
   padding: 0;
   cursor: pointer;
-  z-index: 2;
+  z-index: 5;           /* above images/overlays */
   user-select: none;
 }
 
@@ -1941,7 +1899,7 @@ body.project-view #main .close:before {
   position: absolute;
   right: 10px;
   bottom: 10px;
-  z-index: 2;
+  z-index: 5;
 
   font-size: 0.85rem;
   padding: 0.35rem 0.55rem;
@@ -1953,7 +1911,7 @@ body.project-view #main .close:before {
 /* Mobile tuning */
 @media screen and (max-width: 736px) {
   .carousel__viewport {
-    aspect-ratio: 16 / 9; /* slightly taller on phones */
+    aspect-ratio: 16 / 9;
   }
   .carousel__btn {
     width: 48px;
@@ -1962,35 +1920,3 @@ body.project-view #main .close:before {
     line-height: 46px;
   }
 }
-
-.carousel__btn { z-index: 9999; pointer-events: auto; }
-.carousel__counter { z-index: 9999; pointer-events: none; }
-
-/* Ensure carousel arrows are actually clickable on desktop */
-.carousel__btn {
-  z-index: 9999 !important;
-  pointer-events: auto !important;
-}
-
-.carousel__viewport,
-.carousel__track,
-.carousel__slide,
-.carousel__slide img {
-  pointer-events: none;
-}
-
-/* but allow swiping/clicking inside viewport area (not needed for buttons) */
-.carousel__viewport {
-  pointer-events: auto;
-}
-
-/* Make carousel arrows clickable above template overlays */
-.carousel__btn {
-  z-index: 9999 !important;
-  pointer-events: auto !important;
-}
-
-
-
-
-
