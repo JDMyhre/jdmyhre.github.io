@@ -1979,3 +1979,52 @@ body.project-view #main .close:before {
   font-weight: 600;
   letter-spacing: 0.28rem;
 }
+
+/* ===== KILL ANY TILE "BORDER" (usually inset shadow / pseudo-frame / image inset) ===== */
+
+/* 1) Remove any border-like effects on the tile card and clickable area */
+.tiles article,
+.tiles article > a {
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;          /* catches inset "fake borders" */
+  -webkit-box-shadow: none !important;
+}
+
+/* 2) Remove any pseudo-elements that can draw frames/overlays */
+.tiles article::before,
+.tiles article::after,
+.tiles article > a::before,
+.tiles article > a::after {
+  box-shadow: none !important;
+  border: 0 !important;
+  outline: 0 !important;
+}
+
+/* 3) Make the image truly edge-to-edge (no inset padding/background) */
+.tiles article > a .image {
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* 4) Disable template's image overlay (often creates a framed look) */
+.tiles article > a .image::before,
+.tiles article > a .image::after {
+  opacity: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* 5) Ensure the actual <img> fills the wrapper with no gaps */
+.tiles article > a .image img {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+}
