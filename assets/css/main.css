@@ -2044,3 +2044,15 @@ body.project-view #main .close:before {
   display: block !important;
 }
 
+/* ===== Match project hero image radius to carousel images ===== */
+
+#main article .image.main {
+  border-radius: 10px;
+  overflow: hidden; /* ensures the image clips to the radius */
+}
+
+#main article .image.main img {
+  border-radius: 0; /* prevent double rounding */
+  display: block;
+}
+
