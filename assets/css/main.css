@@ -1882,7 +1882,7 @@ body.project-view #main .close:before {
   width: 100%;
 
   /* This enforces a consistent visible area and prevents "giant image" on mobile */
-  aspect-ratio: 3 / 2;
+  aspect-ratio: 16 / 9;
   background: rgba(255,255,255,0.03);
 }
 
@@ -1953,7 +1953,7 @@ body.project-view #main .close:before {
 /* Mobile tuning */
 @media screen and (max-width: 736px) {
   .carousel__viewport {
-    aspect-ratio: 3 / 2; /* slightly taller on phones */
+    aspect-ratio: 16 / 9; /* slightly taller on phones */
   }
   .carousel__btn {
     width: 48px;
@@ -1989,6 +1989,7 @@ body.project-view #main .close:before {
   z-index: 9999 !important;
   pointer-events: auto !important;
 }
+
 
 
 
