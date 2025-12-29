@@ -2045,7 +2045,7 @@ body.project-view #main .close:before {
 /* desktop-only: move text DOWN a bit */
 @media screen and (min-width: 737px) {
   #projects .tiles a.tile .tile-text {
-    bottom: 0.65rem !important; /* smaller = closer to bottom = “lower” */
+    bottom: 0.3rem !important; /* smaller = closer to bottom = “lower” */
   }
 }
 
@@ -2055,6 +2055,7 @@ body.project-view #main .close:before {
     grid-template-columns: 1fr !important;
   }
 }
+
 
 
 
