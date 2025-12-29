@@ -2246,6 +2246,40 @@ body.project-view #main .close:before {
   background: transparent !important;
 }
 
+/* =========================
+   RESUME PREVIEW — MOBILE: remove “border” caused by padding and any mobile-only image styling
+   Paste at very bottom of CSS
+   ========================= */
+
+@media screen and (max-width: 736px) {
+
+  /* 1) In case mobile CSS re-adds frame styling */
+  #resume .resume-image,
+  #resume .resume-image img {
+    border: 0 !important;
+    box-shadow: none !important;
+    outline: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    filter: none !important;
+  }
+
+  /* 2) If the "border" is actually the article padding showing around the image,
+        make the image bleed to the edges on mobile */
+  #resume .resume-image {
+    /* Adjust this number if needed — it's typically the mobile article padding */
+    margin-left: -1.5rem !important;
+    margin-right: -1.5rem !important;
+    width: calc(100% + 3rem) !important;
+  }
+
+  #resume .resume-image img {
+    width: 100% !important;
+    height: auto !important;
+    display: block !important;
+  }
+}
+
 
 
 
