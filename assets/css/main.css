@@ -1979,3 +1979,41 @@ body.project-view #main .close:before {
     max-width: 100% !important;
   }
 }
+
+/* ===== RESUME PAGE: full-width image, NO card, NO border ===== */
+
+/* Resume article should behave like normal document flow */
+#resume {
+  overflow: visible;
+}
+
+/* Remove any wrapper styling around the resume image */
+#resume .image.main {
+  margin: 2rem 0 0 0;
+  padding: 0;
+  background: none;
+  border-radius: 0;
+  box-shadow: none;
+  overflow: visible;
+}
+
+/* Resume image itself: full width, natural height */
+#resume .image.main img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+
+  object-fit: initial;
+  position: static;
+
+  background: none;
+  filter: none;
+  opacity: 1;
+}
+
