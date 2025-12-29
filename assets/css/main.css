@@ -1947,3 +1947,35 @@ body.project-view #main .close:before {
   border-radius: 8px;
   background: #fff; /* prevents ugly matte edges on a transparent PNG */
 }
+
+/* ===== Project tiles: keep TITLES inside the tile (no overflow) ===== */
+
+/* Make sure the clickable tile is the layout box */
+#projects .tiles article > a {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Title: allow wrapping and prevent overflow */
+#projects .tiles article > a h3 {
+  white-space: normal !important;      /* allow line breaks */
+  overflow-wrap: anywhere;             /* break long words if needed */
+  word-break: normal;
+  hyphens: auto;
+  line-height: 1.2;
+  margin: 0 0 0.35rem 0;
+  max-width: 100%;
+}
+
+/* If your template uses “uppercase + tracking”, it can push text out */
+@media screen and (max-width: 736px) {
+  #projects .tiles article > a h3 {
+    letter-spacing: 0.14rem !important; /* reduce tracking on mobile */
+    font-size: 0.9rem;                 /* slight downsize */
+  }
+}
+
+/* If you have a paragraph under the title, keep it from pushing layout weirdly */
+#projects .tiles article > a p {
+  max-width: 100%;
+}
