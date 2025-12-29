@@ -2056,3 +2056,10 @@ body.project-view #main .close:before {
   display: block;
 }
 
+/* ===== Remove global image darkening overlay (template cleanup) ===== */
+
+.image:before {
+  opacity: 0 !important;
+  background: none !important;
+}
+
