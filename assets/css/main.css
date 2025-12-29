@@ -2056,47 +2056,30 @@ body.project-view #main .close:before {
   display: block;
 }
 
-/* ===== RESUME PREVIEW (IMAGE) — force "fit to width", centered, no crop ===== */
+/* ===== Resume page image (natural scaling, centered, no crop) ===== */
 
-/* Ensure resume modal doesn't crop its own content */
-#resume {
-  overflow: visible !important;
-}
-
-/* If your resume uses the standard hero wrapper */
 #resume .image.main {
-  position: relative !important;
-  display: block !important;
-  width: 100% !important;
-  height: auto !important;
-  margin: 1.5rem 0 0 0 !important;
-
-  /* optional: match your site style */
-  border-radius: 10px !important;
-  overflow: hidden !important; /* only clips to radius */
-  background: rgba(255,255,255,0.03);
-  padding: 1rem;
-  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  margin: 1.5rem 0 0 0;
+  border-radius: 10px;
+  overflow: hidden;
+  background: transparent;
 }
 
-/* Hard override any "cover/absolute/100% height" rules that came from tiles/carousels */
 #resume .image.main img {
-  position: static !important;
-  inset: auto !important;
-
-  display: block !important;
-  width: 100% !important;
-  max-width: 100% !important;
-  height: auto !important;
-
-  object-fit: contain !important;
-  object-position: center !important;
-
-  margin: 0 auto !important;
-  border-radius: 8px !important;
-  filter: none !important;
-  opacity: 1 !important;
+  display: block;
+  width: 100%;
+  height: auto;              /* THIS is the key */
+  max-width: 100%;
+  margin: 0 auto;
+  object-fit: initial;       /* undo cover/contain */
+  position: static;          /* undo absolute */
+  filter: none;
+  opacity: 1;
 }
+
+
 
 
 
