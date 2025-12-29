@@ -1979,3 +1979,23 @@ body.project-view #main .close:before {
 #projects .tiles article > a p {
   max-width: 100%;
 }
+
+/* ===== Project page titles: keep inside the frame (no overflow) ===== */
+
+/* The big article title on project pages */
+#main article h2.major {
+  max-width: 100%;
+  white-space: normal;        /* allow wrapping */
+  overflow-wrap: anywhere;    /* break long words if needed */
+  word-break: normal;
+  hyphens: auto;
+  line-height: 1.15;
+}
+
+/* If tracking (letter-spacing) is pushing it too wide, reduce on smaller screens */
+@media screen and (max-width: 736px) {
+  #main article h2.major {
+    letter-spacing: 0.12rem;  /* smaller than template default */
+    font-size: 1.6rem;        /* optional: prevents huge titles on mobile */
+  }
+}
