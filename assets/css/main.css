@@ -2017,22 +2017,6 @@ body.project-view #main .close:before {
   opacity: 1;
 }
 
-/* ===== Project tiles: force anchor text to bottom (DESKTOP only) ===== */
-@media screen and (min-width: 737px) {
-  .tiles a.tile {
-    position: relative;
-  }
-
-  .tiles a.tile .tile-text {
-    position: absolute;
-    left: 1.5rem;
-    right: 1.5rem;
-    bottom: 1.5rem; /* increase to move DOWN */
-    margin: 0;
-    padding: 0;
-  }
-}
-
 
 
 
