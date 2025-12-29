@@ -2186,7 +2186,7 @@ body.project-view #main .close:before {
   position: absolute !important;
   left: 1.25rem !important;
   right: 1.25rem !important;
-  bottom: 0.65rem !important;
+  bottom: 0.0rem !important;
   z-index: 9999 !important;
 
   background: none !important;
@@ -2204,6 +2204,7 @@ body.project-view #main .close:before {
   position: relative !important;
   z-index: 9999 !important;
 }
+
 
 
 
