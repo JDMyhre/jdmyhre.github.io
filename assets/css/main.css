@@ -1944,20 +1944,6 @@ body.project-view #main .close:before {
   display: block;
 }
 
-/* One (and only one) smooth gradient overlay */
-#projects .tiles a.tile::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to top,
-    rgba(0,0,0,0.78) 0%,
-    rgba(0,0,0,0.35) 45%,
-    rgba(0,0,0,0.00) 75%
-  );
-  pointer-events: none;
-}
-
 /* Text sits above gradient */
 #projects .tiles a.tile .tile-text {
   position: absolute;
@@ -2012,20 +1998,6 @@ body.project-view #main .close:before {
   display: block !important;
 }
 
-/* gradient overlay (single, smooth) */
-#projects .tiles a.tile::after {
-  content: "" !important;
-  position: absolute !important;
-  inset: 0 !important;
-  background: linear-gradient(
-    to top,
-    rgba(0,0,0,0.78) 0%,
-    rgba(0,0,0,0.35) 45%,
-    rgba(0,0,0,0.00) 75%
-  ) !important;
-  pointer-events: none !important;
-}
-
 /* text */
 #projects .tiles a.tile .tile-text {
   position: absolute !important;
@@ -2055,6 +2027,7 @@ body.project-view #main .close:before {
     grid-template-columns: 1fr !important;
   }
 }
+
 
 
 
