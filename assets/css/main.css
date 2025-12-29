@@ -2017,19 +2017,15 @@ body.project-view #main .close:before {
   opacity: 1;
 }
 
-/* ===== Projects tiles: move tile text DOWN on DESKTOP only ===== */
-
-/* Desktop/tablet only (mobile stays as-is) */
 @media screen and (min-width: 737px) {
-  #projects .tiles article > a .content {
-    justify-content: flex-end;   /* push content toward bottom */
-    padding-bottom: 1.75rem;     /* tweak this number to taste */
-  }
-
-  /* Optional: nudge title itself slightly */
-  #projects .tiles article > a h3 {
-    margin-bottom: 0.15rem;
+  #projects .tiles article > a .inner {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 1.75rem;   /* change this to move up/down */
   }
 }
+
+
 
 
