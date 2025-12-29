@@ -2020,9 +2020,10 @@ body.project-view #main .close:before {
 /* ===== Project tiles: move text DOWN on DESKTOP only ===== */
 @media screen and (min-width: 737px) {
   .tiles a.tile .tile-text {
-    bottom: 1.5rem; /* increase to move DOWN */
+    bottom: 2.0rem; /* increase to move DOWN */
   }
 }
+
 
 
 
