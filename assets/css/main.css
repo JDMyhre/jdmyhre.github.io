@@ -2063,21 +2063,36 @@ body.project-view #main .close:before {
   background: none !important;
 }
 
-/* ===== FIX RESUME MODAL / PDF OVERFLOW ===== */
+/* ===== RESUME: restore centered, responsive IMAGE preview (no clipping) ===== */
 
-/* Ensure resume modal contains its content */
+/* Do NOT let resume content get cropped by container rules */
 #resume {
-  overflow: hidden;
+  overflow: visible;
 }
 
-/* Constrain embedded resume (iframe or embed) */
-#resume iframe,
-#resume embed,
-#resume object {
-  width: 100%;
-  max-width: 100%;
-  height: 80vh;          /* keeps it readable without spilling */
-  border: none;
-  display: block;
+/* If your resume preview uses the template wrapper */
+#resume .image.main {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin: 1.5rem 0;
+  border-radius: 10px;
+  overflow: hidden;                 /* clips only to radius, not to a forced size */
+  background: rgba(255,255,255,0.03);
+  padding: 1rem;
 }
+
+/* The resume preview image: scale-to-fit and center */
+#resume .image.main img {
+  display: block;
+  max-width: 100%;
+  width: 100%;
+  height: auto;                     /* THIS is what prevents cropping */
+  object-fit: contain !important;   /* override any earlier "cover" rules */
+  object-position: center !important;
+  margin: 0 auto;
+  border-radius: 8px;
+}
+
+
 
