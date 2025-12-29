@@ -2028,6 +2028,90 @@ body.project-view #main .close:before {
   }
 }
 
+/* =========================================================
+   PROJECT TILES — FINAL, SINGLE SOURCE OF TRUTH
+   Image gradient ONLY. Clean text. No text band.
+   ========================================================= */
+
+#projects .tiles {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+/* Tile container */
+#projects .tiles a.tile {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 10px;
+  text-decoration: none;
+}
+
+/* Tile image */
+#projects .tiles a.tile > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  z-index: 0;
+  filter: none;
+}
+
+/* SINGLE gradient — on the IMAGE (tile), not the text */
+#projects .tiles a.tile::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.75) 0%,
+    rgba(0,0,0,0.35) 45%,
+    rgba(0,0,0,0.00) 75%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Text container — CLEAN, NO BACKGROUND */
+#projects .tiles a.tile .tile-text {
+  position: absolute;
+  left: 1.25rem;
+  right: 1.25rem;
+  bottom: 0.65rem; /* desktop position */
+  z-index: 2;
+  background: none !important;
+  box-shadow: none !important;
+  filter: none !important;
+}
+
+/* Text itself — CLEAN */
+#projects .tiles a.tile .tile-text h3 {
+  margin: 0;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 0.35rem;
+  line-height: 1.2;
+  background: none !important;
+}
+
+/* MOBILE: single column + original text position */
+@media screen and (max-width: 736px) {
+  #projects .tiles {
+    grid-template-columns: 1fr;
+  }
+
+  #projects .tiles a.tile .tile-text {
+    bottom: 1.05rem;
+  }
+}
+
+
 
 
 
