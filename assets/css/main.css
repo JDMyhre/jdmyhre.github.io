@@ -2017,12 +2017,30 @@ body.project-view #main .close:before {
   opacity: 1;
 }
 
+/* ===== Projects tiles: move tile title LOWER (DESKTOP ONLY) ===== */
 @media screen and (min-width: 737px) {
-  #projects .tiles article > a .inner {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 1.00rem;   /* change this to move up/down */
+
+  /* The clickable tile area is usually the flex container */
+  #projects .tiles article > a {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-end !important; /* push all content to bottom */
+    align-items: flex-start !important;
+    padding-bottom: 1.75rem !important;   /* <-- increase to move lower */
+  }
+
+  /* Dimension template uses h2 inside tiles; some custom setups use h3 */
+  #projects .tiles article > a h2,
+  #projects .tiles article > a h3 {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* If your template wraps the title in a .content block, keep it bottom too */
+  #projects .tiles article > a .content {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
 }
 
