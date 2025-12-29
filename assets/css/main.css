@@ -1948,54 +1948,34 @@ body.project-view #main .close:before {
   background: #fff; /* prevents ugly matte edges on a transparent PNG */
 }
 
-/* ===== Project tiles: keep TITLES inside the tile (no overflow) ===== */
+/* ===== FIX: project page title overflowing on mobile ===== */
+/* Targets the H2 title inside the modal/article (HTML5UP Dimension structure) */
 
-/* Make sure the clickable tile is the layout box */
-#projects .tiles article > a {
-  position: relative;
-  overflow: hidden;
-}
-
-/* Title: allow wrapping and prevent overflow */
-#projects .tiles article > a h3 {
-  white-space: normal !important;      /* allow line breaks */
-  overflow-wrap: anywhere;             /* break long words if needed */
-  word-break: normal;
-  hyphens: auto;
-  line-height: 1.2;
-  margin: 0 0 0.35rem 0;
-  max-width: 100%;
-}
-
-/* If your template uses “uppercase + tracking”, it can push text out */
-@media screen and (max-width: 736px) {
-  #projects .tiles article > a h3 {
-    letter-spacing: 0.14rem !important; /* reduce tracking on mobile */
-    font-size: 0.9rem;                 /* slight downsize */
-  }
-}
-
-/* If you have a paragraph under the title, keep it from pushing layout weirdly */
-#projects .tiles article > a p {
-  max-width: 100%;
-}
-
-/* ===== Project page titles: keep inside the frame (no overflow) ===== */
-
-/* The big article title on project pages */
+#main article > h2.major,
+#main article header > h2.major,
 #main article h2.major {
-  max-width: 100%;
-  white-space: normal;        /* allow wrapping */
-  overflow-wrap: anywhere;    /* break long words if needed */
-  word-break: normal;
-  hyphens: auto;
-  line-height: 1.15;
+  max-width: 100% !important;
+  white-space: normal !important;     /* overrides template nowrap */
+  overflow-wrap: anywhere !important; /* allows wrapping even with long words */
+  word-break: normal !important;
+  hyphens: auto !important;
 }
 
-/* If tracking (letter-spacing) is pushing it too wide, reduce on smaller screens */
+/* Reduce tracking + size on phones so it stays inside the frame */
 @media screen and (max-width: 736px) {
+  #main article > h2.major,
+  #main article header > h2.major,
   #main article h2.major {
-    letter-spacing: 0.12rem;  /* smaller than template default */
-    font-size: 1.6rem;        /* optional: prevents huge titles on mobile */
+    letter-spacing: 0.18rem !important;
+    font-size: 1.45rem !important;
+    line-height: 1.15 !important;
+    padding-right: 2.5rem; /* gives breathing room near the X button */
+  }
+
+  /* The underline can also look like it “runs off” — keep it contained */
+  #main article > h2.major:after,
+  #main article header > h2.major:after,
+  #main article h2.major:after {
+    max-width: 100% !important;
   }
 }
