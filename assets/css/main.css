@@ -1727,103 +1727,6 @@ body.project-view #main .close:before {
   }
 }
 
-#projects .tiles article {
-  margin: 0;
-  border: 0;
-  border-radius: 10px;
-  background: transparent;
-  box-shadow: none;
-  overflow: hidden;
-}
-
-#projects .tiles article > a {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-
-  min-height: 7.5rem;
-  padding: 1.5rem;
-  box-sizing: border-box;
-
-  border: 0;
-  border-bottom: 0;  /* override global dotted underline */
-  text-decoration: none;
-
-  border-radius: 10px;
-  overflow: hidden;
-  background: rgba(255, 255, 255, 0.03);
-
-  transition: transform 0.15s ease-in-out, background-color 0.15s ease-in-out;
-}
-
-@media screen and (max-width: 736px) {
-  #projects .tiles article > a {
-    padding: 1.25rem;
-    min-height: 7rem;
-  }
-}
-
-/* Tile image: cover fill, but ONLY inside project tiles */
-#projects .tiles article > a .image {
-  position: absolute;
-  inset: 0;
-  margin: 0;
-  border-radius: 10px;
-  overflow: hidden;
-}
-#projects .tiles article > a .image:before {
-  opacity: 0; /* don't darken tile images */
-  background: none;
-}
-#projects .tiles article > a .image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  display: block;
-}
-
-/* Bottom gradient overlay for text legibility */
-#projects .tiles article > a::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0.70),
-    rgba(0, 0, 0, 0.30) 35%,
-    rgba(0, 0, 0, 0.00) 65%
-  );
-  pointer-events: none;
-}
-
-/* Keep tile text above the gradient */
-#projects .tiles article > a h3,
-#projects .tiles article > a p {
-  position: relative;
-  z-index: 1;
-  color: #fff;
-}
-
-#projects .tiles article > a h3 {
-  margin: 0 0 0.35rem 0;
-  letter-spacing: 0.28rem;
-  font-size: 0.95rem;
-  font-weight: 600;
-}
-
-#projects .tiles article > a p {
-  margin: 0;
-  opacity: 0.85;
-  font-size: 0.9rem;
-  line-height: 1.4;
-}
-
-#projects .tiles article > a:hover {
-  transform: translateY(-2px);
-  background: rgba(255, 255, 255, 0.05);
-}
 
 /* =========================================
    CAROUSEL
@@ -2015,6 +1918,69 @@ body.project-view #main .close:before {
   background: none;
   filter: none;
   opacity: 1;
+}
+
+/* ===== PROJECT TILES (matches your HTML: .tiles > a.tile > img + .tile-text) ===== */
+
+#projects .tiles a.tile {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border-radius: 10px;
+
+  /* kill any template underline/border behavior */
+  border: 0 !important;
+  border-bottom: 0 !important;
+  text-decoration: none !important;
+}
+
+/* Make image fill the tile cleanly */
+#projects .tiles a.tile > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+/* One (and only one) smooth gradient overlay */
+#projects .tiles a.tile::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.78) 0%,
+    rgba(0,0,0,0.35) 45%,
+    rgba(0,0,0,0.00) 75%
+  );
+  pointer-events: none;
+}
+
+/* Text sits above gradient */
+#projects .tiles a.tile .tile-text {
+  position: absolute;
+  left: 1.25rem;
+  right: 1.25rem;
+  bottom: 1.05rem;     /* mobile baseline (you said you like mobile) */
+  z-index: 1;
+}
+
+#projects .tiles a.tile .tile-text h3 {
+  margin: 0;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.35rem;
+  line-height: 1.2;
+}
+
+/* DESKTOP ONLY: move the text DOWN */
+@media screen and (min-width: 737px) {
+  #projects .tiles a.tile .tile-text {
+    bottom: 0.70rem;   /* smaller bottom value = closer to bottom = “lower” */
+  }
 }
 
 
