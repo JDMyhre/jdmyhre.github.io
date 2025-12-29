@@ -2146,13 +2146,48 @@ body.project-view #main .close:before {
   z-index: 1;
 }
 
-/* Text ABOVE gradient */
+/* ===== FORCE FIX: text ALWAYS above tile gradient ===== */
+
+/* ensure tile is a stacking context */
+#projects .tiles a.tile {
+  position: relative !important;
+  overflow: hidden !important;
+  isolation: isolate !important; /* prevents weird stacking with ancestors */
+}
+
+/* image layer */
+#projects .tiles a.tile > img {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  z-index: 0 !important;
+  filter: none !important;
+}
+
+/* gradient layer (over image) */
+#projects .tiles a.tile::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.75) 0%,
+    rgba(0,0,0,0.35) 45%,
+    rgba(0,0,0,0.00) 75%
+  ) !important;
+  pointer-events: none !important;
+  z-index: 1 !important;
+}
+
+/* text layer (over gradient) */
 #projects .tiles a.tile .tile-text {
-  position: absolute;
-  left: 1.25rem;
-  right: 1.25rem;
-  bottom: 0.65rem;
-  z-index: 2;
+  position: absolute !important;
+  left: 1.25rem !important;
+  right: 1.25rem !important;
+  bottom: 0.65rem !important;
+  z-index: 9999 !important;
 
   background: none !important;
   box-shadow: none !important;
@@ -2160,24 +2195,17 @@ body.project-view #main .close:before {
 }
 
 #projects .tiles a.tile .tile-text h3 {
-  margin: 0;
-  color: #ffffff;
-  text-transform: uppercase;
-  letter-spacing: 0.35rem;
-  line-height: 1.2;
+  margin: 0 !important;
+  color: #fff !important;
+  opacity: 1 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.35rem !important;
   background: none !important;
+  position: relative !important;
+  z-index: 9999 !important;
 }
 
-/* Mobile layout untouched */
-@media screen and (max-width: 736px) {
-  #projects .tiles {
-    grid-template-columns: 1fr;
-  }
 
-  #projects .tiles a.tile .tile-text {
-    bottom: 1.05rem;
-  }
-}
 
 
 
