@@ -2184,7 +2184,7 @@ body.project-view #main .close:before {
 /* text layer (over gradient) */
 #projects .tiles a.tile .tile-text {
   position: absolute !important;
-  left: 0.75rem !important;
+  left: 0.3rem !important;
   right: 1.25rem !important;
   bottom: 0.0rem !important;
   z-index: 9999 !important;
@@ -2204,6 +2204,7 @@ body.project-view #main .close:before {
   position: relative !important;
   z-index: 9999 !important;
 }
+
 
 
 
