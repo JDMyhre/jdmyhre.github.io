@@ -2205,6 +2205,47 @@ body.project-view #main .close:before {
   z-index: 9999 !important;
 }
 
+/* =========================
+   RESUME PREVIEW — FULL WIDTH, NO BORDER
+   Targets your actual markup: .resume-image > img
+   Paste at very bottom of CSS
+   ========================= */
+
+#resume .resume-image {
+  display: block !important;
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* If your theme adds overlays/frames via pseudo elements, kill them */
+#resume .resume-image::before,
+#resume .resume-image::after {
+  content: none !important;
+  display: none !important;
+}
+
+#resume .resume-image img {
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+  max-width: 100% !important;
+
+  /* Ensures no weird cropping behaviors */
+  object-fit: contain !important;
+
+  /* Remove any "frame" look */
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+}
+
 
 
 
