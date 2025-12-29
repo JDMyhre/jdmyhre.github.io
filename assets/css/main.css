@@ -2017,52 +2017,6 @@ body.project-view #main .close:before {
   opacity: 1;
 }
 
-/* ===== PROJECT TILES: one clean overlay + desktop-only text position ===== */
-
-.tiles a.tile {
-  position: relative;
-  display: block;
-  overflow: hidden;
-  border-radius: 12px;
-}
-
-/* Image behaves normally */
-.tiles a.tile > img {
-  display: block;
-  width: 100%;
-  height: auto;        /* IMPORTANT: do not force height:100% here */
-}
-
-/* The text block is the overlay container */
-.tiles a.tile .tile-text {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 1.1rem 1.25rem;
-  z-index: 2;
-}
-
-/* The overlay gradient lives on the text block ONLY (prevents stacking) */
-.tiles a.tile .tile-text {
-  background: linear-gradient(to top, rgba(0,0,0,0.78), rgba(0,0,0,0));
-}
-
-/* Title styling */
-.tiles a.tile .tile-text h3 {
-  margin: 0;
-  color: #fff;
-  text-transform: uppercase;
-  letter-spacing: 0.35rem;
-}
-
-/* DESKTOP ONLY: push text DOWN by increasing bottom padding */
-@media screen and (min-width: 737px) {
-  .tiles a.tile .tile-text {
-    padding-top: 1.8rem;   /* increases overlay height upward */
-    padding-bottom: 1.6rem;/* effectively moves text lower */
-  }
-}
 
 
 
