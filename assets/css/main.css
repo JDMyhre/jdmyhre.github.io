@@ -1724,5 +1724,35 @@ body.project-view #main .close:before {
   margin-top: 0.25rem;
 }
 
+/* Component sections */
+#main article h4 {
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.25rem;
+}
+
+/* Short summary under component title */
+.component-summary {
+  margin-bottom: 0.75rem;
+  max-width: 42rem;
+  opacity: 0.9;
+}
+
+/* Requirement → Design list */
+.req-design {
+  margin-left: 1.25rem;
+}
+
+.req-design li {
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+}
+
+.req-design strong {
+  text-transform: uppercase;
+  letter-spacing: 0.15rem;
+  font-size: 0.75em;
+}
+
 
 
