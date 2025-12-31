@@ -373,9 +373,37 @@
 					    <div class="carousel__counter" aria-live="polite" data-carousel-counter>1/1</div>
 					  </div>
 					</div>
+
+					<p class="component-summary">
+					  Throughout all the tasks in the competition there were a number of orientations that props could be. Some teams handle this by 
+						having multiple object manipulators, however our team decided that we wanted to have a single object manipulator capable of 
+						both rotation and tilt. Design, production, and assembly of the mechanism were done by me.
+					</p>
 					
-					<p>
-					  Describe the claw articulation mechanism here.
+					<p class="requirement">
+					  <strong>Requirement:</strong> The claw must rotate 90-degrees and tilt 90-degrees
+					</p>
+					<p class="solution">
+					  <strong>Solution:</strong> A differential gear mechanism allowed us to tilt the claw by driving the gears in the same direction 
+						and rotate the claw by driving them in opposite directions.
+					</p>
+
+					<p class="requirement">
+					  <strong>Requirement:</strong> Must Use 180-degree Servos and be capable of rotating and tilting 90-degrees at the same time
+					</p>
+					<p class="solution">
+					  <strong>Solution:</strong> The price of brushless servos (necessary for waterproofing) capable of greater than 180 degrees of rotation 
+						was prohibitively expensive for the club. By using a 2:3 gear ratio, the claw could be both tilted and rotated 90 degrees at the 
+						same time with only 180 degrees of rotation from either servo.
+					</p>
+
+					<p class="requirement">
+					  <strong>Requirement:</strong> Electrical Simplicity
+					</p>
+					<p class="solution">
+					  <strong>Solution:</strong> The differential gear mechanism allows us to use only two servos that remain stationary relative to the chassis. 
+						This is important, because the more that the servos and their cables move, the more likely their waterproofing is to fail. An object 
+						manipulator failure mid-competition would essentially end the run, so every effort to minimize the possibility was taken.
 					</p>
 
 					<hr />
@@ -665,6 +693,7 @@
 
 	</body>
 </html>
+
 
 
 
