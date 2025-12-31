@@ -1738,40 +1738,17 @@ body.project-view #main .close:before {
   opacity: 0.9;
 }
 
-/* Requirement → Solution pairing */
-.req-list {
+.requirement {
+  margin-bottom: 0.25rem;
+}
+
+.solution {
   margin-left: 1.25rem;
-}
-
-.req-list > li {
   margin-bottom: 1rem;
-  line-height: 1.6;
+  opacity: 0.9;
 }
 
-.req-list > li > strong {
-  text-transform: uppercase;
-  letter-spacing: 0.15rem;
-  font-size: 0.75em;
-}
 
-/* Nested design solution */
-.req-list ul {
-  list-style: none;
-  margin: 0.35rem 0 0.75rem 1.25rem;
-  padding-left: 0;
-}
-
-.req-list ul li {
-  position: relative;
-  padding-left: 1rem;
-}
-
-.req-list ul li::before {
-  content: "→";
-  position: absolute;
-  left: 0;
-  opacity: 0.6;
-}
 
 
 
