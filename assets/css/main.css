@@ -1748,6 +1748,23 @@ body.project-view #main .close:before {
   opacity: 0.9;
 }
 
+/* ===== Requirement block styling ===== */
+.requirement {
+  margin: 2rem 0 0.75rem;
+  padding: 0.75rem 1rem;
+  border-left: 3px solid #5fc4d4;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.requirement strong {
+  font-weight: 600;
+}
+
+.requirement span {
+  display: block;
+  margin-top: 0.25rem;
+}
+
 
 
 
