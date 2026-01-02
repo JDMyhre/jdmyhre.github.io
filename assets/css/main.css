@@ -1765,6 +1765,17 @@ body.project-view #main .close:before {
   margin-top: 0.25rem;
 }
 
+.solution ul {
+  margin: 0.5rem 0 0 1.25rem;
+  padding: 0;
+  list-style-type: disc;
+}
+
+.solution li {
+  margin-bottom: 0.4rem;
+  line-height: 1.5;
+}
+
 
 
 
