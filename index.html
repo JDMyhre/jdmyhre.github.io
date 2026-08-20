@@ -133,6 +133,14 @@
 				        <h3>VESPA</h3>
 				      </div>
 				    </a>
+
+					<a class="tile" href="#project-vespa-cards">
+						<img src="images/vespa/vespa-tile.jpeg" alt="VESPA contribution card prototype" />
+						<div class="tile-text">
+						<h3>VESPA - Card Layout</h3>
+					  </div>
+					</a>
+					  
 	<!-- Commenting out unfinished projects
 				    <a class="tile" href="#project-profiling-float">
 				      <img src="images/pic02.jpg" alt="Profiling Float thumbnail" />
@@ -1722,6 +1730,77 @@
   })();
 </script>
 
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+	/* ==============================================
+	   Contribution cards: keep only one open
+	   ============================================== */
+
+	const contributionCards =
+		document.querySelectorAll('[data-contribution-card]');
+
+	contributionCards.forEach(function (card) {
+
+		card.addEventListener('toggle', function () {
+
+			if (!card.open) return;
+
+			contributionCards.forEach(function (otherCard) {
+
+				if (otherCard !== card) {
+					otherCard.open = false;
+				}
+
+			});
+
+		});
+
+	});
+
+
+	/* ==============================================
+	   Thumbnail galleries
+	   ============================================== */
+
+	document.querySelectorAll('[data-gallery]').forEach(function (gallery) {
+
+		const mainImage =
+			gallery.querySelector('[data-gallery-main]');
+
+		const thumbnails =
+			gallery.querySelectorAll('[data-gallery-src]');
+
+		thumbnails.forEach(function (thumbnail) {
+
+			thumbnail.addEventListener('click', function () {
+
+				const newSrc =
+					thumbnail.getAttribute('data-gallery-src');
+
+				const newAlt =
+					thumbnail.getAttribute('data-gallery-alt') || '';
+
+				mainImage.src = newSrc;
+				mainImage.alt = newAlt;
+
+				thumbnails.forEach(function (button) {
+					button.classList.remove('is-active');
+					button.setAttribute('aria-pressed', 'false');
+				});
+
+				thumbnail.classList.add('is-active');
+				thumbnail.setAttribute('aria-pressed', 'true');
+
+			});
+
+		});
+
+	});
+
+});
+</script>
+	
 	</body>
 </html>
 
