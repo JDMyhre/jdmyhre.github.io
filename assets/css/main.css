@@ -2053,7 +2053,10 @@ body.project-view #main .close:before {
    ========================================================= */
 
 
-/* Keep intro and project grid aligned to the same width */
+/* ---------------------------------------------------------
+   INTRO / HEADER WIDTH
+   --------------------------------------------------------- */
+
 #header .content {
 	width: 40rem;
 	max-width: 100%;
@@ -2061,39 +2064,59 @@ body.project-view #main .close:before {
 
 
 /* ---------------------------------------------------------
-   Navigation inside intro box
+   MAIN NAVIGATION
    --------------------------------------------------------- */
 
 #header .content .inner nav {
 	display: flex;
 	justify-content: center;
+	width: 100%;
 	margin-top: 1.5rem;
 }
 
+#header .content .inner nav ul {
+	display: inline-flex;
+	width: auto;
+	margin-left: auto;
+	margin-right: auto;
+}
 
-/* Slightly tighten intro text above buttons */
+#header .content .inner nav ul li {
+	width: 9rem;
+	flex: 0 0 9rem;
+}
+
+#header .content .inner nav ul li a {
+	width: 100%;
+	min-width: 0;
+	padding-left: 0.75rem;
+	padding-right: 0.75rem;
+	text-align: center;
+}
+
+
+/* Slightly tighten spacing above nav */
 #header .content .inner > p {
 	margin-bottom: 0;
 }
 
 
 /* ---------------------------------------------------------
-   Homepage project section
+   HOMEPAGE PROJECT SECTION
    --------------------------------------------------------- */
 
 #header > .home-projects {
-	width: 40rem;
-	max-width: 100%;
+	width: 58rem;
+	max-width: calc(100vw - 4rem);
 	margin-top: 2rem;
 	position: relative;
 }
 
 
-/* IMPORTANT:
-   Remove Dimension's vertical connector above Projects
-*/
-#header > .home-projects:before {
-	display: none;
+/* Remove Dimension's vertical connector */
+#header > .home-projects::before {
+	content: none !important;
+	display: none !important;
 }
 
 
@@ -2107,24 +2130,25 @@ body.project-view #main .close:before {
 
 
 /* ---------------------------------------------------------
-   Project tile grid
+   PROJECT TILE GRID
    --------------------------------------------------------- */
 
 .home-projects .tiles {
 	display: grid;
 	grid-template-columns: repeat(2, minmax(0, 1fr));
-	gap: 1.25rem;
+	gap: 1.5rem;
 	margin: 0;
 	width: 100%;
 }
 
 
-/* Individual tile */
+/* Individual project tile */
 .home-projects .tiles a.tile {
 	position: relative;
 	display: block;
 	width: 100%;
 	aspect-ratio: 16 / 9;
+
 	overflow: hidden;
 	border-radius: 10px;
 
@@ -2136,7 +2160,7 @@ body.project-view #main .close:before {
 }
 
 
-/* Tile image */
+/* Project image */
 .home-projects .tiles a.tile > img {
 	position: absolute;
 	inset: 0;
@@ -2155,13 +2179,13 @@ body.project-view #main .close:before {
 }
 
 
-/* Slight hover zoom */
+/* Hover effect */
 .home-projects .tiles a.tile:hover > img {
 	transform: scale(1.025);
 }
 
 
-/* Gradient so project name remains readable */
+/* Gradient overlay */
 .home-projects .tiles a.tile::after {
 	content: "";
 	position: absolute;
@@ -2179,15 +2203,22 @@ body.project-view #main .close:before {
 }
 
 
-/* Project name */
+/* ---------------------------------------------------------
+   PROJECT TITLE
+   --------------------------------------------------------- */
+
 .home-projects .tiles a.tile .tile-text {
 	position: absolute;
 
-	left: 0.3rem;
-	right: 1.25rem;
-	bottom: 0;
+	left: 1.15rem;
+	right: auto;
+	bottom: 1rem;
+
+	padding: 0;
 
 	z-index: 2;
+
+	text-align: left;
 
 	background: none !important;
 	box-shadow: none !important;
@@ -2200,6 +2231,7 @@ body.project-view #main .close:before {
 
 	color: #ffffff;
 
+	text-align: left;
 	text-transform: uppercase;
 	letter-spacing: 0.35rem;
 	line-height: 1.2;
@@ -2208,13 +2240,56 @@ body.project-view #main .close:before {
 }
 
 
-/* ---------------------------------------------------------
-   Mobile
-   --------------------------------------------------------- */
+/* =========================================================
+   MOBILE
+   ========================================================= */
 
 @media screen and (max-width: 736px) {
 
+	/* ---------------------------------------------
+	   Keep nav buttons side-by-side
+	   --------------------------------------------- */
+
+	#header .content .inner nav {
+		width: 100%;
+	}
+
+	#header .content .inner nav ul {
+		display: flex !important;
+		flex-direction: row !important;
+		width: 100%;
+	}
+
+	#header .content .inner nav ul li {
+		flex: 1 1 0;
+		width: auto;
+
+		border-top: 0 !important;
+		border-left: solid 1px #ffffff !important;
+	}
+
+	#header .content .inner nav ul li:first-child {
+		border-left: 0 !important;
+	}
+
+	#header .content .inner nav ul li a {
+		width: 100%;
+		min-width: 0 !important;
+
+		padding-left: 0.4rem;
+		padding-right: 0.4rem;
+
+		font-size: 0.7rem;
+	}
+
+
+	/* ---------------------------------------------
+	   Project section
+	   --------------------------------------------- */
+
 	#header > .home-projects {
+		width: 100%;
+		max-width: 100%;
 		margin-top: 1.5rem;
 	}
 
@@ -2223,14 +2298,13 @@ body.project-view #main .close:before {
 		gap: 1rem;
 	}
 
+
+	/* Project titles remain bottom-left */
 	.home-projects .tiles a.tile .tile-text {
-		left: 0.6rem;
-		right: 1.25rem;
-		bottom: 0.6rem;
+		left: 1rem;
+		right: auto;
+		bottom: 0.85rem;
+		text-align: left;
 	}
 
 }
-
-
-
-
