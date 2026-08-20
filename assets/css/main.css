@@ -1821,9 +1821,13 @@ body.project-view #main .close:before {
 .vespa-card__summary {
 	display: flex;
 	flex-direction: column;
-	height: 100%;
 	cursor: pointer;
 	outline: none;
+}
+
+/* Only force equal-height summaries while cards are closed */
+.vespa-card:not([open]) > .vespa-card__summary {
+	height: 100%;
 }
 
 /* Hover only really matters on desktop */
@@ -1919,6 +1923,10 @@ body.project-view #main .close:before {
 
 .vespa-card__details {
 	padding: 1.25rem;
+}
+
+.vespa-card[open] .vespa-card__details {
+	display: block;
 }
 
 .vespa-card__details .component-summary {
