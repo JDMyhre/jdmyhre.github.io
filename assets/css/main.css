@@ -2058,7 +2058,7 @@ body.project-view #main .close:before {
    --------------------------------------------------------- */
 
 #header .content {
-	width: 40rem;
+	width: 52rem;
 	max-width: 100%;
 }
 
@@ -2106,7 +2106,7 @@ body.project-view #main .close:before {
    --------------------------------------------------------- */
 
 #header > .home-projects {
-	width: 58rem;
+	width: 52rem;
 	max-width: calc(100vw - 4rem);
 	margin-top: 2rem;
 	position: relative;
