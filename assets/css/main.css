@@ -2313,7 +2313,8 @@ body.project-view #main .close:before {
    SENIOR DESIGN PROJECT
    ========================================================= */
 
-.senior-design-project p {
-	font-size: 1rem;
+#main article.senior-design-project p {
+	font-size: 1.2rem !important;
 	line-height: 1.75;
+
 }
