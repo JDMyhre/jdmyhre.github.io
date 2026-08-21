@@ -2318,3 +2318,14 @@ body.project-view #main .close:before {
 	line-height: 1.75;
 
 }
+
+/* =========================================================
+   PROJECTS NOTE
+   ========================================================= */
+
+.projects-note {
+    margin-top: -0.5rem;
+    margin-bottom: 2rem;
+    font-size: 0.9rem;
+    opacity: 0.75;
+}
