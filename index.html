@@ -164,7 +164,16 @@
 
 			</a>
 
-
+			<a class="tile" href="#project-luna">
+				<img
+					src="images/luna/luna-tile.jpeg"
+					alt="LUNA autonomous surface vehicle"
+				/>
+				<div class="tile-text">
+					<h3>LUNA</h3>
+				</div>
+			</a>
+			
 			<!-- Add project tiles here -->
 
 
@@ -1929,6 +1938,201 @@
 
 </article>
 
+<!-- ======================================================
+     Project: LUNA - Gyroscopic Sensor Stabilization
+     ====================================================== -->
+
+<article id="project-luna" class="luna-project">
+
+	<h2 class="major">LUNA</h2>
+
+	<span class="image main">
+		<img
+			src="images/luna/luna-hero.PNG"
+			alt="LUNA autonomous surface vehicle developed by the GalaxSea team at UT Dallas"
+		/>
+	</span>
+
+	<p>
+		LUNA is an autonomous surface vehicle developed by GalaxSea, part of
+		UT Dallas' underwater robotics organization, for the 2024 RoboBoat
+		Competition in Sarasota, Florida. The vehicle relied on onboard sensors
+		to autonomously navigate, identify objects, and complete competition tasks.
+	</p>
+
+	<p>
+		I was primarily a member of the organization's ROV team, but GalaxSea's
+		mechanical team was short-handed as the competition deadline approached.
+		I joined the project to help and designed a passive stabilization system
+		for LUNA's primary perception sensors: a ZED 2 stereo camera and Velodyne
+		VLP-16 LiDAR.
+	</p>
+
+
+	<!-- ==================================================
+	     DESIGN GOAL
+	     ================================================== -->
+
+	<section class="luna-section">
+
+		<h3>Design Goal</h3>
+
+		<p>
+			Roll and pitch of the boat could change the orientation of the camera
+			and LiDAR as LUNA moved through the water, introducing additional
+			motion into the sensor data used by the autonomous system.
+		</p>
+
+		<p>
+			The goal was to mechanically reduce the amount of hull motion
+			transferred to the sensor package without requiring an actively
+			controlled gimbal. I designed a freely pivoting sensor mount combined
+			with a high-speed flywheel to provide passive gyroscopic stabilization.
+		</p>
+
+	</section>
+
+
+	<!-- ==================================================
+	     MECHANICAL DESIGN
+	     ================================================== -->
+
+	<section class="luna-section">
+
+		<h3>Mechanical Design</h3>
+
+		<div class="luna-image-grid">
+
+			<img
+				src="images/luna/gyro-cad.PNG"
+				alt="CAD model of the LUNA gyroscopic sensor stabilization system"
+				loading="lazy"
+			/>
+
+			<img
+				src="images/luna/gyro-exploded.PNG"
+				alt="Exploded view of the LUNA gyroscopic sensor stabilization system"
+				loading="lazy"
+			/>
+
+		</div>
+
+		<p>
+			The mechanism supports the camera and LiDAR on a pivoting structure
+			that allows the sensor package to move relative to the hull. A
+			gyroscopic flywheel mounted within the assembly provides resistance
+			to rapid changes in orientation as the boat rolls and pitches.
+		</p>
+
+		<p>
+			To create the flywheel, I disassembled two computer hard drives and
+			repurposed their internal components. I used the brushless DC spindle
+			motor from one drive and stacked the platters from both drives onto
+			the motor, creating a compact rotating mass from components already
+			designed for smooth operation at high rotational speeds.
+		</p>
+
+	</section>
+
+
+	<!-- ==================================================
+	     HOW IT WORKS
+	     ================================================== -->
+
+	<section class="luna-section">
+
+		<h3>How It Works</h3>
+
+		<div class="luna-media">
+			<video autoplay loop muted playsinline preload="metadata">
+				<source
+					src="images/luna/gyro-cad-animation.mp4"
+					type="video/mp4"
+				/>
+			</video>
+		</div>
+
+		<p>
+			When the hard-drive platters are brought to speed, the rotating
+			flywheel develops angular momentum and resists rapid changes to the
+			orientation of its rotational axis.
+		</p>
+
+		<p>
+			Because the sensor platform is free to pivot relative to LUNA's hull,
+			the boat can move beneath the sensor assembly rather than transferring
+			all of its roll and pitch directly to the camera and LiDAR. The
+			flywheel helps resist this movement and reduces the amount of
+			hull-induced motion experienced by the sensors.
+		</p>
+
+	</section>
+
+
+	<!-- ==================================================
+	     PHYSICAL PROTOTYPE
+	     ================================================== -->
+
+	<section class="luna-section">
+
+		<h3>Physical Prototype</h3>
+
+		<div class="luna-media">
+			<video autoplay loop muted playsinline preload="metadata">
+				<source
+					src="images/luna/gyro-video.mp4"
+					type="video/mp4"
+				/>
+			</video>
+		</div>
+
+		<p>
+			The completed mechanism was built as a functional assembly for
+			integration with LUNA. The design had to support both perception
+			sensors while remaining compact enough to fit the existing vehicle
+			and be completed within the team's remaining competition schedule.
+		</p>
+
+		<p>
+			Testing showed a noticeable improvement in sensor stability with the
+			flywheel operating compared with the freely pivoting assembly alone.
+			The rotating mass helped the platform resist disturbances and remain
+			closer to its intended orientation as the supporting structure moved.
+		</p>
+
+	</section>
+
+
+	<!-- ==================================================
+	     PERFORMANCE AND LIMITATIONS
+	     ================================================== -->
+
+	<section class="luna-section">
+
+		<h3>Performance &amp; Limitations</h3>
+
+		<p>
+			The prototype improved stabilization, but it did not completely
+			reject larger or sudden disturbances. The available flywheel angular
+			momentum was limited by the size and speed of the repurposed hard-drive
+			assembly. A sufficiently large disturbance could displace the sensor
+			platform from its centered position and cause it to oscillate briefly
+			before settling.
+		</p>
+
+		<p>
+			Despite this limitation, the system provided substantially better
+			stability than the same mechanism without the flywheel operating.
+			A future revision could increase the flywheel's moment of inertia or
+			operating speed to provide greater angular momentum, while further
+			refinement of damping, mass distribution, and pivot geometry could
+			improve the transient response.
+		</p>
+
+	</section>
+
+</article>				
+
 				<!-- Project: Profiling Float -->
 				<article id="project-profiling-float">
  			 		<h2 class="major">Profiling Float</h2>
@@ -1938,18 +2142,7 @@
 					<p><strong>Goal:</strong> Explain what a profiling float is.</p>
 					<p><strong>My role:</strong> Designed, manufactured, assembled, programmed.</p>
 				</article>
-
-				<!-- Project: Luna - 2025 Competition ASV -->
-				<article id="project-luna">
-  					<h2 class="major">Luna</h2>
-
-					<span class="image main"><img src="images/pic03.jpg" alt="" /></span>
-
-					<p><strong>Description:</strong> Explain Galaxsea and Roboboat.</p>
-					<p><strong>Contribution:</strong> Lidar and stereo camera active gimbal mount</p>
-					<p><strong>How It Works:</strong> Explain functionality</p>
-					<p><strong>Images:</strong> Show images.</p>
-				</article>
+				
 
 				<!-- Project: Reaming Fixtures -->
 				<article id="project-reaming">
