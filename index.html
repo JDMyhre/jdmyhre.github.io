@@ -2003,13 +2003,13 @@
 	<h4>Gimbal Motion</h4>
 
 	<div class="luna-media">
-		<video autoplay loop muted playsinline>
-			<source
-				src="images/luna/gyro-cad-animation.mp4"
-				type="video/mp4"
-			/>
-		</video>
-	</div>
+	<video class="lazy-video" autoplay loop muted playsinline preload="none">
+		<source
+			data-src="images/luna/gyro-cad-animation.mp4"
+			type="video/mp4"
+		/>
+	</video>
+</div>
 
 	<p>
 		The freely pivoting mount allows the hull to roll and pitch beneath the
@@ -2024,13 +2024,13 @@
 	<h4>Physical Prototype</h4>
 
 	<div class="luna-media">
-		<video autoplay loop muted playsinline>
-			<source
-				src="images/luna/gyro-video.mp4"
-				type="video/mp4"
-			/>
-		</video>
-	</div>
+	<video class="lazy-video" autoplay loop muted playsinline preload="none">
+		<source
+			data-src="images/luna/gyro-video.mp4"
+			type="video/mp4"
+		/>
+	</video>
+</div>
 
 	<p>
 		Testing showed substantially less sensor movement with the flywheel running
@@ -2300,6 +2300,38 @@ document.addEventListener('DOMContentLoaded', function () {
 	});
 
 });
+</script>
+
+		<script>
+	document.querySelectorAll('.lazy-video').forEach(video => {
+
+		const observer = new IntersectionObserver(entries => {
+			entries.forEach(entry => {
+
+				if (entry.isIntersecting) {
+
+					if (!video.dataset.loaded) {
+						const source = video.querySelector('source');
+
+						source.src = source.dataset.src;
+						video.load();
+						video.dataset.loaded = 'true';
+					}
+
+					video.play().catch(() => {});
+
+				} else {
+					video.pause();
+				}
+
+			});
+		}, {
+			rootMargin: '300px 0px'
+		});
+
+		observer.observe(video);
+
+	});
 </script>
 	
 	</body>
