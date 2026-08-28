@@ -2345,7 +2345,57 @@ document.addEventListener('DOMContentLoaded', function () {
 	});
 </script>
 
-<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "85a94d506e0f4bcc9f164cad422fee57"}'></script><!-- End Cloudflare Web Analytics -->
+<!-- Cloudflare Web Analytics with owner exclusion -->
+<script>
+(function () {
+    const exclusionKey = 'excludeCloudflareAnalytics';
+
+    const params = new URLSearchParams(window.location.search);
+
+    // Turn analytics off for this browser
+    if (params.get('analytics') === 'off') {
+        localStorage.setItem(exclusionKey, '1');
+
+        params.delete('analytics');
+
+        const cleanUrl =
+            window.location.pathname +
+            (params.toString() ? '?' + params.toString() : '') +
+            window.location.hash;
+
+        window.history.replaceState({}, '', cleanUrl);
+    }
+
+    // Turn analytics back on for this browser
+    if (params.get('analytics') === 'on') {
+        localStorage.removeItem(exclusionKey);
+
+        params.delete('analytics');
+
+        const cleanUrl =
+            window.location.pathname +
+            (params.toString() ? '?' + params.toString() : '') +
+            window.location.hash;
+
+        window.history.replaceState({}, '', cleanUrl);
+    }
+
+    // Load Cloudflare only if this browser is not excluded
+    if (localStorage.getItem(exclusionKey) !== '1') {
+        const script = document.createElement('script');
+
+        script.type = 'module';
+        script.src = 'https://static.cloudflareinsights.com/beacon.min.js';
+
+        script.setAttribute(
+            'data-cf-beacon',
+            '{"token":"85a94d506e0f4bcc9f164cad422fee57"}'
+        );
+
+        document.body.appendChild(script);
+    }
+})();
+</script>
 		
 	</body>
 </html>
