@@ -2107,7 +2107,9 @@
 	</h2>
 
 
-	<!-- Hero Image -->
+	<!-- ==================================================
+	     HERO
+	     ================================================== -->
 
 	<span class="image main">
 		<img
@@ -2115,9 +2117,6 @@
 			alt="CAD model of the profiling float"
 		/>
 	</span>
-
-
-	<!-- Introduction -->
 
 	<p>
 		This profiling float is a personal engineering project designed to
@@ -2127,22 +2126,11 @@
 	</p>
 
 
-
-	<hr />
-
-
 	<!-- ==================================================
 	     DESIGN
 	     ================================================== -->
 
 	<h3>Design</h3>
-
-	<p>
-		The float uses an ESP32-based control system and a mechanically actuated
-		syringe system to vary displaced volume. A pressure sensor provides depth
-		feedback while position sensing allows the buoyancy mechanism to be
-		controlled and referenced.
-	</p>
 
 
 	<div class="vespa-gallery" data-gallery>
@@ -2155,8 +2143,8 @@
 			/>
 		</div>
 
-		<div class="vespa-gallery__thumbs">
 
+		<div class="vespa-gallery__thumbs">
 
 			<button
 				class="vespa-gallery__thumb is-active"
@@ -2205,6 +2193,7 @@
 				/>
 			</button>
 
+
 			<button
 				class="vespa-gallery__thumb"
 				type="button"
@@ -2225,8 +2214,13 @@
 	</div>
 
 
+	<p>
+		The float uses an ESP32-based control system and a mechanically actuated
+		syringe system to vary displaced volume. A pressure sensor provides depth
+		feedback while position sensing allows the buoyancy mechanism to be
+		controlled and referenced.
+	</p>
 
-	<hr />
 
 
 	<!-- ==================================================
@@ -2234,13 +2228,6 @@
 	     ================================================== -->
 
 	<h3>PCB Design</h3>
-
-	<p>
-		A custom PCB integrates the float's controller, power distribution,
-		sensors, and actuator connections into a compact electronics package.
-		The board was developed alongside the mechanical system to simplify
-		wiring and improve integration inside the float.
-	</p>
 
 
 	<div class="vespa-gallery" data-gallery>
@@ -2253,8 +2240,8 @@
 			/>
 		</div>
 
-		<div class="vespa-gallery__thumbs">
 
+		<div class="vespa-gallery__thumbs">
 
 			<button
 				class="vespa-gallery__thumb is-active"
@@ -2319,82 +2306,79 @@
 				/>
 			</button>
 
-
 		</div>
 
 	</div>
 
 
+	<p>
+		A custom PCB integrates the float's controller, power distribution,
+		sensors, and actuator connections into a compact electronics package.
+		The board was developed alongside the mechanical system to simplify
+		wiring and improve integration inside the float.
+	</p>
 
-	<hr />
 
 
 	<!-- ==================================================
-	     FUNCTIONAL TESTING
+	     FUNCTION TESTING
 	     ================================================== -->
 
-	<h3>Functional Testing</h3>
+	<h3>Function Testing</h3>
 
 
-	<div class="pf-test-block">
+	<h4>Intended Motion</h4>
 
-		<h4>Intended Motion</h4>
-
-		<p>
-			The CAD animation shows the intended motion of the buoyancy-control
-			mechanism as the actuator drives the syringe plungers through their
-			operating range.
-		</p>
+	<div class="luna-media">
 
 		<video
-			class="pf-video"
+			class="lazy-video"
 			autoplay
-			muted
 			loop
+			muted
 			playsinline
-			controls
-			preload="auto"
+			preload="none"
 		>
 			<source
-				src="images/profiling-float/pf-cad-video.mp4"
+				data-src="images/profiling-float/pf-cad-video.mp4"
 				type="video/mp4"
 			/>
-			Your browser does not support HTML5 video.
 		</video>
 
 	</div>
 
+	<p>
+		The CAD animation shows the intended motion of the buoyancy-control
+		mechanism as the servo drives the syringe plungers through their
+		operating range.
+	</p>
 
-	<div class="pf-test-block">
 
-		<h4>Prototype Test</h4>
+	<h4>Prototype Test</h4>
 
-		<p>
-			Benchtop testing of the current prototype demonstrates the physical
-			mechanism reproducing the motion developed in CAD.
-		</p>
+	<div class="luna-media">
 
 		<video
-			class="pf-video"
+			class="lazy-video"
 			autoplay
-			muted
 			loop
+			muted
 			playsinline
-			controls
-			preload="auto"
+			preload="none"
 		>
 			<source
-				src="images/profiling-float/pf-video.mp4"
+				data-src="images/profiling-float/pf-video.mp4"
 				type="video/mp4"
 			/>
-			Your browser does not support HTML5 video.
 		</video>
 
 	</div>
 
+	<p>
+		Benchtop testing of the current prototype demonstrates the physical
+		mechanism reproducing the motion developed in CAD.
+	</p>
 
-
-	<hr />
 
 
 	<!-- ==================================================
