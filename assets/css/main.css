@@ -2358,3 +2358,138 @@ body.project-view #main .close:before {
 		grid-template-columns: 1fr;
 	}
 }
+
+/* =========================================================
+   PROFILING FLOAT - IN PROGRESS
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   HOMEPAGE CURRENT PROJECT TILE
+   --------------------------------------------------------- */
+
+.home-projects .tiles a.current-project-tile > img {
+	filter: blur(4px) brightness(0.65);
+	transform: scale(1.08);
+}
+
+
+/* Preserve blur/scale during hover */
+.home-projects .tiles a.current-project-tile:hover > img {
+	filter: blur(4px) brightness(0.72);
+	transform: scale(1.11);
+}
+
+
+/* CURRENT PROJECT label centered over tile */
+.current-project-label {
+	position: absolute;
+
+	top: 50%;
+	left: 50%;
+
+	transform: translate(-50%, -50%);
+
+	z-index: 3;
+
+	padding: 0.45rem 0.7rem;
+
+	border: 1px solid rgba(255,255,255,0.65);
+	border-radius: 4px;
+
+	background: rgba(0,0,0,0.25);
+
+	color: #ffffff;
+
+	font-size: 0.8rem;
+	font-weight: 600;
+
+	letter-spacing: 0.18rem;
+	text-transform: uppercase;
+
+	white-space: nowrap;
+}
+
+
+/* ---------------------------------------------------------
+   FUNCTION TESTING
+   --------------------------------------------------------- */
+
+.profiling-float-project .pf-test-block {
+	margin-top: 1.75rem;
+	margin-bottom: 2.5rem;
+}
+
+
+.profiling-float-project .pf-test-block h4 {
+	margin-bottom: 0.6rem;
+}
+
+
+.profiling-float-project .pf-video {
+	display: block;
+
+	width: 100%;
+	aspect-ratio: 16 / 9;
+
+	margin-top: 1rem;
+
+	object-fit: contain;
+
+	background: #000000;
+
+	border-radius: 6px;
+	border: 1px solid rgba(255,255,255,0.15);
+}
+
+
+/* ---------------------------------------------------------
+   REMAINING WORK
+   --------------------------------------------------------- */
+
+.profiling-float-project .pf-todo {
+	list-style: none;
+	padding-left: 0;
+	margin-left: 0;
+}
+
+
+.profiling-float-project .pf-todo li {
+	position: relative;
+
+	padding-left: 2rem;
+	margin-bottom: 0.85rem;
+
+	line-height: 1.6;
+}
+
+
+.profiling-float-project .pf-todo li::before {
+	content: "";
+
+	position: absolute;
+
+	left: 0.2rem;
+	top: 0.43rem;
+
+	width: 0.75rem;
+	height: 0.75rem;
+
+	border: 1px solid rgba(255,255,255,0.75);
+	border-radius: 2px;
+}
+
+
+/* ---------------------------------------------------------
+   MOBILE
+   --------------------------------------------------------- */
+
+@media screen and (max-width: 736px) {
+
+	.current-project-label {
+		font-size: 0.68rem;
+		letter-spacing: 0.14rem;
+		padding: 0.4rem 0.6rem;
+	}
+
+}
