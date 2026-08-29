@@ -2493,3 +2493,9 @@ body.project-view #main .close:before {
 	}
 
 }
+
+.pf-project-title span {
+	display: block;
+	margin-top: 0.35rem;
+	font-size: 0.65em;
+}
