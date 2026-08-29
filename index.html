@@ -184,6 +184,23 @@
 					<h3>LUNA</h3>
 				</div>
 			</a>
+
+<a class="tile current-project-tile" href="#project-profiling-float">
+
+	<img
+		src="images/profiling-float/pf-hero.PNG"
+		alt="Profiling float currently in development"
+	/>
+
+	<div class="current-project-label">
+		Current Project
+	</div>
+
+	<div class="tile-text">
+		<h3>Profiling Float</h3>
+	</div>
+
+</a>
 			
 			<!-- Add project tiles here -->
 
@@ -2078,16 +2095,330 @@
 
 </article>
 
-				<!-- Project: Profiling Float -->
-				<article id="project-profiling-float">
- 			 		<h2 class="major">Profiling Float</h2>
+<!-- ======================================================
+     Project: Profiling Float
+     ====================================================== -->
 
-					<span class="image main"><img src="images/pic02.jpg" alt="" /></span>
+<article id="project-profiling-float" class="profiling-float-project">
 
-					<p><strong>Goal:</strong> Explain what a profiling float is.</p>
-					<p><strong>My role:</strong> Designed, manufactured, assembled, programmed.</p>
-				</article>
-				
+	<h2 class="major">Profiling Float (In Progress)</h2>
+
+
+	<!-- Hero Image -->
+
+	<span class="image main">
+		<img
+			src="images/profiling-float/pf-hero.PNG"
+			alt="CAD model of the profiling float"
+		/>
+	</span>
+
+
+	<!-- Introduction -->
+
+	<p>
+		This profiling float is a personal engineering project designed to
+		autonomously hold a specified depth within the water column by actively
+		adjusting its buoyancy. The project was inspired by a MATE ROV competition
+		task that I wanted to revisit and develop independently.
+	</p>
+
+
+
+	<hr />
+
+
+	<!-- ==================================================
+	     DESIGN
+	     ================================================== -->
+
+	<h3>Design</h3>
+
+	<p>
+		The float uses an ESP32-based control system and a mechanically actuated
+		syringe system to vary displaced volume. A pressure sensor provides depth
+		feedback while position sensing allows the buoyancy mechanism to be
+		controlled and referenced.
+	</p>
+
+
+	<div class="vespa-gallery" data-gallery>
+
+		<div class="vespa-gallery__main">
+			<img
+				src="images/profiling-float/pf-design.PNG"
+				alt="Annotated profiling float system design"
+				data-gallery-main
+			/>
+		</div>
+
+		<div class="vespa-gallery__thumbs">
+
+
+			<button
+				class="vespa-gallery__thumb is-active"
+				type="button"
+				data-gallery-src="images/profiling-float/pf-design.PNG"
+				data-gallery-alt="Annotated profiling float system design"
+				aria-label="Show annotated system design"
+				aria-pressed="true"
+			>
+				<img
+					src="images/profiling-float/pf-design.PNG"
+					alt=""
+					loading="lazy"
+				/>
+			</button>
+
+
+			<button
+				class="vespa-gallery__thumb"
+				type="button"
+				data-gallery-src="images/profiling-float/pf-schematic.PNG"
+				data-gallery-alt="Profiling float electrical schematic"
+				aria-label="Show electrical schematic"
+				aria-pressed="false"
+			>
+				<img
+					src="images/profiling-float/pf-schematic.PNG"
+					alt=""
+					loading="lazy"
+				/>
+			</button>
+
+
+			<button
+				class="vespa-gallery__thumb"
+				type="button"
+				data-gallery-src="images/profiling-float/pf-exploded-1.PNG"
+				data-gallery-alt="Exploded CAD view of the profiling float"
+				aria-label="Show exploded CAD view"
+				aria-pressed="false"
+			>
+				<img
+					src="images/profiling-float/pf-exploded-1.PNG"
+					alt=""
+					loading="lazy"
+				/>
+			</button>
+
+
+		</div>
+
+	</div>
+
+
+
+	<hr />
+
+
+	<!-- ==================================================
+	     PCB DESIGN
+	     ================================================== -->
+
+	<h3>PCB Design</h3>
+
+	<p>
+		A custom PCB integrates the float's controller, power distribution,
+		sensors, and actuator connections into a compact electronics package.
+		The board was developed alongside the mechanical system to simplify
+		wiring and improve integration inside the float.
+	</p>
+
+
+	<div class="vespa-gallery" data-gallery>
+
+		<div class="vespa-gallery__main">
+			<img
+				src="images/profiling-float/pf-pcb-1.PNG"
+				alt="Profiling float PCB design"
+				data-gallery-main
+			/>
+		</div>
+
+		<div class="vespa-gallery__thumbs">
+
+
+			<button
+				class="vespa-gallery__thumb is-active"
+				type="button"
+				data-gallery-src="images/profiling-float/pf-pcb-1.PNG"
+				data-gallery-alt="Profiling float PCB design view 1"
+				aria-label="Show PCB design view 1"
+				aria-pressed="true"
+			>
+				<img
+					src="images/profiling-float/pf-pcb-1.PNG"
+					alt=""
+					loading="lazy"
+				/>
+			</button>
+
+
+			<button
+				class="vespa-gallery__thumb"
+				type="button"
+				data-gallery-src="images/profiling-float/pf-pcb-2.PNG"
+				data-gallery-alt="Profiling float PCB design view 2"
+				aria-label="Show PCB design view 2"
+				aria-pressed="false"
+			>
+				<img
+					src="images/profiling-float/pf-pcb-2.PNG"
+					alt=""
+					loading="lazy"
+				/>
+			</button>
+
+
+			<button
+				class="vespa-gallery__thumb"
+				type="button"
+				data-gallery-src="images/profiling-float/pf-pcb-3.PNG"
+				data-gallery-alt="Profiling float PCB design view 3"
+				aria-label="Show PCB design view 3"
+				aria-pressed="false"
+			>
+				<img
+					src="images/profiling-float/pf-pcb-3.PNG"
+					alt=""
+					loading="lazy"
+				/>
+			</button>
+
+
+			<button
+				class="vespa-gallery__thumb"
+				type="button"
+				data-gallery-src="images/profiling-float/pf-pcb-4.PNG"
+				data-gallery-alt="Profiling float PCB design view 4"
+				aria-label="Show PCB design view 4"
+				aria-pressed="false"
+			>
+				<img
+					src="images/profiling-float/pf-pcb-4.PNG"
+					alt=""
+					loading="lazy"
+				/>
+			</button>
+
+
+		</div>
+
+	</div>
+
+
+
+	<hr />
+
+
+	<!-- ==================================================
+	     FUNCTIONAL TESTING
+	     ================================================== -->
+
+	<h3>Functional Testing</h3>
+
+
+	<div class="pf-test-block">
+
+		<h4>Intended Motion</h4>
+
+		<p>
+			The CAD animation shows the intended motion of the buoyancy-control
+			mechanism as the actuator drives the syringe plungers through their
+			operating range.
+		</p>
+
+		<video
+			class="pf-video"
+			controls
+			muted
+			loop
+			playsinline
+			preload="metadata"
+			poster="images/profiling-float/pf-design.PNG"
+		>
+			<source
+				src="images/profiling-float/pf-cad-video.mp4"
+				type="video/mp4"
+			/>
+			Your browser does not support HTML5 video.
+		</video>
+
+	</div>
+
+
+	<div class="pf-test-block">
+
+		<h4>Prototype Test</h4>
+
+		<p>
+			Benchtop testing of the current prototype demonstrates the physical
+			mechanism reproducing the motion developed in CAD.
+		</p>
+
+		<video
+			class="pf-video"
+			controls
+			muted
+			loop
+			playsinline
+			preload="metadata"
+			poster="images/profiling-float/pf-progress.PNG"
+		>
+			<source
+				src="images/profiling-float/pf-video.mp4"
+				type="video/mp4"
+			/>
+			Your browser does not support HTML5 video.
+		</video>
+
+	</div>
+
+
+
+	<hr />
+
+
+	<!-- ==================================================
+	     REMAINING WORK
+	     ================================================== -->
+
+	<h3>Remaining Work</h3>
+
+	<ul class="pf-todo">
+
+		<li>
+			Resin cast the end caps for the final enclosure.
+		</li>
+
+		<li>
+			Print the V5 mechanical assembly with improved cable management
+			and internal routing.
+		</li>
+
+		<li>
+			Measure final mass and displaced volume, then adjust ballast and
+			material density to achieve neutral buoyancy.
+		</li>
+
+		<li>
+			Complete production control software for homing, depth sensing,
+			buoyancy adjustment, and autonomous depth holding.
+		</li>
+
+		<li>
+			Complete waterproofing and pressure testing of the assembled float.
+		</li>
+
+		<li>
+			Perform controlled water testing and tune the depth-control behavior.
+		</li>
+
+	</ul>
+
+
+</article>
 
 				<!-- Project: Reaming Fixtures -->
 				<article id="project-reaming">
