@@ -2119,10 +2119,10 @@
 	</span>
 
 	<p>
-		This profiling float is a personal engineering project designed to
-		autonomously hold a specified depth within the water column by actively
+		This profiling float is a personal project designed to
+		autonomously hold a specified depth within a water column by actively
 		adjusting its buoyancy. The project was inspired by a MATE ROV competition
-		task that I wanted to revisit and develop independently.
+		task that I wanted to tackle independently.
 	</p>
 
 
@@ -2215,10 +2215,9 @@
 
 
 	<p>
-		The float uses an ESP32-based control system and a mechanically actuated
-		syringe system to vary displaced volume. A pressure sensor provides depth
-		feedback while position sensing allows the buoyancy mechanism to be
-		controlled and referenced.
+		The float uses an ESP32-based control system and a servo actuated
+		syringe system to vary displaced volume and adjust the float's buoyancy. A servo drives three syringes using a lead screw. Syringe displacement/travle is tracked by a rotary encoder.  A pressure sensor provides depth
+		feedback so that the float knows where it is depth-wise and can adjust accordingly.
 	</p>
 
 
@@ -2312,10 +2311,9 @@
 
 
 	<p>
-		A custom PCB integrates the float's controller, power distribution,
-		sensors, and actuator connections into a compact electronics package.
-		The board was developed alongside the mechanical system to simplify
-		wiring and improve integration inside the float.
+		A custom PCB was designed to integrate the float's controller, power distribution,
+		sensors, and servo connections into a compact electronics package.
+		The board was developed to reduce the footprint of electronics inside of the float.
 	</p>
 
 
@@ -2348,9 +2346,9 @@
 	</div>
 
 	<p>
-		The CAD animation shows the intended motion of the buoyancy-control
+		The CAD animation above shows the intended motion of the buoyancy control
 		mechanism as the servo drives the syringe plungers through their
-		operating range.
+		operating range to adjust internal volume of the float and as a result its buoyancy.
 	</p>
 
 
@@ -2375,8 +2373,9 @@
 	</div>
 
 	<p>
-		Benchtop testing of the current prototype demonstrates the physical
-		mechanism reproducing the motion developed in CAD.
+		Benchtop testing of the current prototype validates overall functionality of the electronic stack, proving that the PCB was designed and manufactured correctly. 
+		The video above specifically shows a homing sequence wherby on startup the servo drives the syringe carrier up until it makes contact with a limit switch, where 
+		the ESP32 can zero the displacement value that it tracks with the rotary encoder.
 	</p>
 
 
@@ -2390,30 +2389,28 @@
 	<ul class="pf-todo">
 
 		<li>
-			Resin cast the end caps for the final enclosure.
+			Resin cast the end caps so that they can seal with the acrylic tube appropriately
 		</li>
 
 		<li>
-			Print the V5 mechanical assembly with improved cable management
-			and internal routing.
+			Print a V5 of the assembly with improved cable management
+			and internal routing
 		</li>
 
 		<li>
-			Measure final mass and displaced volume, then adjust ballast and
-			material density to achieve neutral buoyancy.
+			Measure final mass of the float, and adjust material density to achieve neutral buoyancy
 		</li>
 
 		<li>
-			Complete production control software for homing, depth sensing,
-			buoyancy adjustment, and autonomous depth holding.
+			Complete V1 of the production code with all functionality of the final profiling float
 		</li>
 
 		<li>
-			Complete waterproofing and pressure testing of the assembled float.
+			Complete waterproofing and pressure testing of the assembled float
 		</li>
 
 		<li>
-			Perform controlled water testing and tune the depth-control behavior.
+			Perform controlled water testing and tune the depth control behavior as necessary
 		</li>
 
 	</ul>
