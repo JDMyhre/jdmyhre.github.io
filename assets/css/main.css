@@ -2499,3 +2499,9 @@ body.project-view #main .close:before {
 	margin-top: 0.35rem;
 	font-size: 0.65em;
 }
+
+.resume-image img {
+	display: block;
+	width: 100%;
+	margin-bottom: 1.5rem;
+}
